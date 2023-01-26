@@ -1,6 +1,8 @@
 # DeveloperSuite
 
-A description of this package.
+A comprehensive tool designed to assist developers in debugging and optimizing their applications.
+
+_DeveloperSuite offers an array of detailed information on various aspects of the application; Developers can easily access crucial information pertaining to the application's performance and functionality, facilitating identification and resolution of any issues._
 
 ![Swift](https://img.shields.io/badge/Swift-5.7-orange?style=flat-square)
 ![Platforms](https://img.shields.io/badge/Platform-iOS_iPadOS_macOS-blue?style=flat-square)
