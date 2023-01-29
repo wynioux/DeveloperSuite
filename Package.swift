@@ -20,7 +20,8 @@ let package = Package(
     targets: [
         .target(
             name: "DeveloperSuite",
-            dependencies: []
+            dependencies: [],
+            path: "Sources"
         ),
         .testTarget(
             name: "DeveloperSuiteTests",

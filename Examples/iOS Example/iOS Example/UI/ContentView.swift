@@ -30,12 +30,17 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            HStack {
+                Text("Developer Suite")
+            }
+            .foregroundColor(Color(.systemBlue))
+            .font(.headline)
+            .padding()
+
+            Text("Shake to Open")
+                .font(.subheadline)
+                .padding()
         }
-        .padding()
     }
 }
 

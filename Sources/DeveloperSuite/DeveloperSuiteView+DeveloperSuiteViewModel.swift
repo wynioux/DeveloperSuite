@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeveloperSuiteViewModel.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,31 +23,26 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: DeveloperSuiteViewModel
 
-@main
-struct iOS_ExampleApp: App {
-    @StateObject private var developerSuiteManager = DeveloperSuiteView.DeveloperSuiteViewModel.default
-
-    var body: some Scene {
-        WindowGroup {
-            ZStack {
-                ContentView()
-                    .zIndex(1)
-
-                if developerSuiteManager.showDeveloperSuite {
-                    DeveloperSuiteView()
-                        .zIndex(2)
-                }
-            }
-            .onShake {
-                withAnimation {
-                    developerSuiteManager.showDeveloperSuite = true
-                }
-            }
-        }
+public extension DeveloperSuiteView {
+    @MainActor final class DeveloperSuiteViewModel: ObservableObject {
+        public static let `default` = DeveloperSuiteViewModel()
+        
+        @Published public var showDeveloperSuite: Bool = false
+        
+        @Published var selection: Module? = nil
+        
+        // MARK: Initializer
+        
+        private init() {}
+        
+        // MARK: Deinitializer
+        
+        deinit {}
     }
 }
+
+

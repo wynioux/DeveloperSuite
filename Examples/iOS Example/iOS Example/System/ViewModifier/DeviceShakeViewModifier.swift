@@ -1,5 +1,5 @@
 //
-//  iOS_ExampleApp.swift
+//  DeviceShakeViewModifier.swift
 //  iOS Example
 //
 //  Copyright (c) 2023 Bahadır A. Güder
@@ -23,31 +23,18 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: DeviceShakeViewModifier
 
-@main
-struct iOS_ExampleApp: App {
-    @StateObject private var developerSuiteManager = DeveloperSuiteView.DeveloperSuiteViewModel.default
+struct DeviceShakeViewModifier: ViewModifier {
+    let action: () -> Void
 
-    var body: some Scene {
-        WindowGroup {
-            ZStack {
-                ContentView()
-                    .zIndex(1)
-
-                if developerSuiteManager.showDeveloperSuite {
-                    DeveloperSuiteView()
-                        .zIndex(2)
-                }
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
+                action()
             }
-            .onShake {
-                withAnimation {
-                    developerSuiteManager.showDeveloperSuite = true
-                }
-            }
-        }
     }
 }

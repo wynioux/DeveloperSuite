@@ -1,5 +1,5 @@
 //
-//  iOS_ExampleApp.swift
+//  UIDevice+deviceDidShakeNotification.swift
 //  iOS Example
 //
 //  Copyright (c) 2023 Bahadır A. Güder
@@ -23,31 +23,10 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: deviceDidShakeNotification
 
-@main
-struct iOS_ExampleApp: App {
-    @StateObject private var developerSuiteManager = DeveloperSuiteView.DeveloperSuiteViewModel.default
-
-    var body: some Scene {
-        WindowGroup {
-            ZStack {
-                ContentView()
-                    .zIndex(1)
-
-                if developerSuiteManager.showDeveloperSuite {
-                    DeveloperSuiteView()
-                        .zIndex(2)
-                }
-            }
-            .onShake {
-                withAnimation {
-                    developerSuiteManager.showDeveloperSuite = true
-                }
-            }
-        }
-    }
+extension UIDevice {
+    static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
 }

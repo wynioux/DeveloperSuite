@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  MonospacedLabelStyle.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,31 +23,19 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: MonospacedLabelStyle
 
-@main
-struct iOS_ExampleApp: App {
-    @StateObject private var developerSuiteManager = DeveloperSuiteView.DeveloperSuiteViewModel.default
-
-    var body: some Scene {
-        WindowGroup {
-            ZStack {
-                ContentView()
-                    .zIndex(1)
-
-                if developerSuiteManager.showDeveloperSuite {
-                    DeveloperSuiteView()
-                        .zIndex(2)
-                }
-            }
-            .onShake {
-                withAnimation {
-                    developerSuiteManager.showDeveloperSuite = true
-                }
-            }
+struct MonospacedLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Label {
+            configuration.title
+                .foregroundColor(Color(.secondaryLabel))
+                .font(.system(.caption2, design: .monospaced))
+        } icon: {
+            configuration.icon
         }
+        .labelStyle(.titleOnly)
     }
 }

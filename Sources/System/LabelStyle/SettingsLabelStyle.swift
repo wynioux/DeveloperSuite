@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  SettingsLabelStyle.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,31 +23,22 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: SettingsLabelStyle
 
-@main
-struct iOS_ExampleApp: App {
-    @StateObject private var developerSuiteManager = DeveloperSuiteView.DeveloperSuiteViewModel.default
+struct SettingsLabelStyle: LabelStyle {
+    var color: Color
+    var size: CGFloat
 
-    var body: some Scene {
-        WindowGroup {
-            ZStack {
-                ContentView()
-                    .zIndex(1)
-
-                if developerSuiteManager.showDeveloperSuite {
-                    DeveloperSuiteView()
-                        .zIndex(2)
-                }
-            }
-            .onShake {
-                withAnimation {
-                    developerSuiteManager.showDeveloperSuite = true
-                }
-            }
+    func makeBody(configuration: Configuration) -> some View {
+        Label {
+            configuration.title
+        } icon: {
+            configuration.icon
+                .imageScale(.small)
+                .foregroundColor(.white)
+                .background(RoundedRectangle(cornerRadius: 7 * size).frame(width: 28 * size, height: 28 * size).foregroundColor(color))
         }
     }
 }
