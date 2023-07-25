@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  UnderlyingError.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,37 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: UnderlyingError
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public enum UnderlyingError: Sendable, Codable, CustomDebugStringConvertible {
+    case decodingError(CodableDecodingError)
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    public var error: Error {
+        switch self {
+        case .decodingError(let codableDecodingError): return codableDecodingError
+        }
+    }
+
+    public init?(_ error: Error) {
+        if let error = error as? DecodingError {
+            self = .decodingError(.init(error))
+            return
+        }
+
+        return nil
+    }
+
+    public var domain: String {
+        switch self {
+        case .decodingError(let codableDecodingError): return codableDecodingError.domain
+        }
+    }
+
+    public var debugDescription: String {
+        switch self {
+        case .decodingError(let codableDecodingError): return codableDecodingError.debugDescription
         }
     }
 }

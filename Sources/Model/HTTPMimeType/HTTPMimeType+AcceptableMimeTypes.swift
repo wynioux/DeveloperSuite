@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  HTTPMimeType+AcceptableMimeTypes.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,12 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: AcceptableMimeTypes
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+public extension HTTPMimeType {
+    static var acceptableMimeTypes: [Self] {
+        return [.htm, .html, .jpeg, .jpg, .json, .pdf, .png, .txt]
     }
 }

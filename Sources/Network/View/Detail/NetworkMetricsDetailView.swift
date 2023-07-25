@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkMetricsDetailView.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,27 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Persistence
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+struct NetworkMetricsDetailView: View {
+    @ObservedObject var entity: NetworkMetricsEntity
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    var body: some View {
+        List {
+            Text("")
         }
+        .navigationTitle("Metrics Details")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: Preview
+
+struct NetworkMetricsDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NetworkMetricsDetailView(entity: NetworkMetricsEntity())
     }
 }

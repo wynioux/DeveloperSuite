@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Network.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,16 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Network
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public final class Network {
+    public static let `default` = Network()
+    public var logger: NetworkLogger.Type { NetworkLogger.self }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    init() {
+        URLSessionDelegateMiddleware.enable()
+        URLProtocolMiddleware.shared.enable()
     }
 }

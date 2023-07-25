@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkHeaderEntity.swift
+//  Persistence
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,37 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: NetworkHeaderEntity
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public final class NetworkHeaderEntity: NSManagedObject, Identifiable {
+    // MARK: Properties
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    @NSManaged public var key: String
+    @NSManaged public var value: String
+
+    // MARK: Convenience Initializer
+
+    public convenience init(context: NSManagedObjectContext, key: String, value: String) {
+        self.init(context: context)
+
+        self.key = key
+        self.value = value
+    }
+}
+
+// MARK: Functional Extension
+
+extension NetworkHeaderEntity {
+    static func description() -> NSEntityDescription {
+        let entityDescription: NSEntityDescription = .init(for: Self.self)
+
+        entityDescription.properties = [
+            NSAttributeDescription(name: "key", attributeType: .stringAttributeType),
+            NSAttributeDescription(name: "value", attributeType: .stringAttributeType)
+        ]
+
+        return entityDescription
     }
 }

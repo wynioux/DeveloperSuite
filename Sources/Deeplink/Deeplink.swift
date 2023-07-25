@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Deeplink.swift
+//  Deeplink
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,22 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Deeplink
 
-@main
-struct iOS_ExampleApp: App {
+public final class Deeplink {
+    public static let `default` = Deeplink()
+    public var logger: DeeplinkLogger.Type { DeeplinkLogger.self }
+    public var actionHandler: DeeplinkActionHandler.Type { DeeplinkActionHandler.self }
+
     init() {}
+}
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+// MARK: Configuration
+
+extension Deeplink {
+    enum Configuration {
+        static let host: String = "suite"
     }
 }

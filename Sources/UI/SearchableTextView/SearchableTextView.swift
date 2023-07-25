@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  SearchableTextView.swift
+//  UI
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,29 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct SearchableTextView: View {
+    @ObservedObject var viewModel: SearchableTextViewModel
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    public init(viewModel: SearchableTextViewModel) {
+        self.viewModel = viewModel
+    }
+
+    public var body: some View {
+        UITextViewRepresentableView(viewModel: viewModel)
+            .searchable(text: $viewModel.searchText)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled(true)
+    }
+}
+
+// MARK: Preview
+
+struct SearchableTextView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchableTextView(viewModel: .init())
     }
 }

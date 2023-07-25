@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NSManagedObjectContext+First.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,16 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: Fetch
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+public extension NSManagedObjectContext {
+    func first<T: NSManagedObject>(_ entity: T.Type, configure: (NSFetchRequest<T>) -> Void = { _ in }) throws -> T? {
+        try fetch(entity) {
+            $0.fetchLimit = 1
+            configure($0)
         }
+        .first
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkLogger+URLSessionStreamDelegate.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: URLSessionStreamDelegate
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+extension NetworkLogger {
+    static func log(readClosedFor streamTask: URLSessionStreamTask) {
+        _debug()
+    }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    static func log(writeClosedFor streamTask: URLSessionStreamTask) {
+        _debug()
+    }
+
+    static func log(betterRouteDiscoveredFor streamTask: URLSessionStreamTask) {
+        _debug()
+    }
+
+    static func log(_ streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
+        _debug()
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  URLSessionTask+UUID.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,19 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: UUID
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+private var key: Void?
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+public extension URLSessionTask {
+    func uuid() -> UUID {
+        guard let uuid = objc_getAssociatedObject(self, &key) as? UUID else {
+            objc_setAssociatedObject(self, &key, UUID(), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return self.uuid()
         }
+
+        return uuid
     }
 }

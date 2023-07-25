@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  SearchOptions+Kind.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,14 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Kind
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+public extension SearchOptions {
+    enum Kind: String, Equatable, Hashable, CaseIterable, Codable {
+        case text = "Text"
+        case wildcard = "Wildcard"
+        case regex = "Regular Expression"
     }
 }

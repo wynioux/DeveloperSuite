@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  LogsLogger.swift
+//  Logs
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,8 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: LogsLogger
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
-    }
-}
+public enum LogsLogger {}

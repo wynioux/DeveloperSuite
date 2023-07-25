@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  HTTPMethod+Equatable.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,6 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+// MARK: Equatable
 
-// MARK: App
-
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
-    }
-}
+extension HTTPMethod: Equatable {}

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Module+Title.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Title
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+extension Module {
+    var title: String {
+        switch self {
+        // swiftformat:disable all
+        case .bundle:       return "Bundle"
+        case .deeplink:     return "Deeplink"
+        case .device:       return "Device"
+        case .logs:         return "Logs"
+        case .network:      return "Network"
+        case .notification: return "Notification"
+        case .userdefaults: return "Userdefaults"
+        case .permission:   return "Permissions"
+        case .settings:     return "Settings"
+        // swiftformat:enable all
         }
     }
 }

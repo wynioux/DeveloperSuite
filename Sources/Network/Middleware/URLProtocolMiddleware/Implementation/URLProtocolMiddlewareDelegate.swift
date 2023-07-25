@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  URLProtocolMiddlewareDelegate.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,31 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: URLProtocolMiddlewareDelegate
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+final class URLProtocolMiddlewareDelegate: NSObject {
+    static let shared = URLProtocolMiddlewareDelegate()
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    let queue = OperationQueue()
+    var taskToMiddleware: [URLSessionTask: URLProtocolMiddleware] = [:]
+
+    override private init() {
+        queue.maxConcurrentOperationCount = 1
+    }
+
+    func register(for task: URLSessionTask?, middleware: URLProtocolMiddleware) {
+        guard let task else { return }
+
+        queue.addOperation {
+            self.taskToMiddleware[task] = middleware
         }
+    }
+
+    func remove(for task: URLSessionTask?) {
+        guard let task else { return }
+
+        taskToMiddleware.removeValue(forKey: task)
     }
 }

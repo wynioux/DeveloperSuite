@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  HTTPStatusCode+Color.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: Color
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+// swiftformat:disable all
+extension HTTPStatusCode {
+    public var color: Color {
+        switch self.rawValue {
+        case 100...199: return Color(.systemBlue)
+        case 200...299: return Color(.systemGreen)
+        case 300...399: return Color(.systemOrange)
+        case 400...499: return Color(.systemPink)
+        case 500...599: return Color(.systemRed)
+        default:        return Color(.systemBrown)
         }
     }
 }
+// swiftformat:enable all

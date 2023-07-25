@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NSAttributeDescription+Convenience.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,15 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: Convenience
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+public extension NSAttributeDescription {
+    convenience init(name: String, attributeType: NSAttributeType, isOptional: Bool = false) {
+        self.init()
+        self.name = name
+        self.attributeType = attributeType
+        self.isOptional = isOptional
     }
 }

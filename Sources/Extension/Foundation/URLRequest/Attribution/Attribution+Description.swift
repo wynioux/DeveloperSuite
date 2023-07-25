@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Attribution+Description.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Description
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension URLRequest.Attribution {
+    var description: String {
+        switch self {
+        case .developer:
+            return "Developer"
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        case .user:
+            return "User"
+
+        @unknown default:
+            return "Unknown"
         }
     }
 }

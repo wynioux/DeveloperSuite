@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Module+DestinationView.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,27 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Deeplink
+import Network
 import SwiftUI
 
-// MARK: App
+// MARK: DestinationView
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+extension Module {
+    @ViewBuilder
+    func destinationView(with queryItems: Binding<[URLQueryItem]?>) -> some View {
+        switch self {
+        // swiftformat:disable all
+        case .bundle:       EmptyView()
+        case .deeplink:     DeeplinkView(queryItems: queryItems)
+        case .device:       EmptyView()
+        case .logs:         EmptyView()
+        case .network:      NetworkView(queryItems: queryItems)
+        case .notification: EmptyView()
+        case .userdefaults: EmptyView()
+        case .permission:   EmptyView()
+        case .settings:     EmptyView()
+        // swiftformat:enable all
         }
     }
 }

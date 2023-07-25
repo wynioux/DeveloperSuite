@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Module+FeatureEnabled.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: FeatureEnabled
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+extension Module {
+    var featureEnabled: Bool {
+        switch self {
+        // swiftformat:disable all
+        case .bundle:       return false
+        case .deeplink:     return true
+        case .device:       return false
+        case .logs:         return false
+        case .network:      return true
+        case .notification: return false
+        case .userdefaults: return false
+        case .permission:   return false
+        case .settings:     return false
+        // swiftformat:enable all
         }
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NSRelationshipDescription+Convenience.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,30 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: Convenience
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension NSRelationshipDescription {
+    convenience init(name: String, relationshipType: RelationshipType, deleteRule: NSDeleteRule = .cascadeDeleteRule, entityDescription: NSEntityDescription) {
+        self.init()
+        self.name = name
+        self.deleteRule = deleteRule
+        self.destinationEntity = entityDescription
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        switch relationshipType {
+        case .oneToOne(let isOptional):
+            switch isOptional {
+            case true:
+                self.minCount = 0
+            case false:
+                self.minCount = 1
+            }
+            self.maxCount = 1
+
+        case .oneToMany:
+            self.minCount = 0
+            self.maxCount = 0
         }
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  SettingsLikeLabelStyle.swift
+//  UI
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,32 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: SettingsLikeLabelStyle
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct SettingsLikeLabelStyle: LabelStyle {
+    var color: Color
+    var size: CGFloat
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    public init(color: Color, size: CGFloat) {
+        self.color = color
+        self.size = size
+    }
+
+    public func makeBody(configuration: Configuration) -> some View {
+        Label {
+            configuration.title
+                .foregroundColor(Color(.label))
+        } icon: {
+            configuration.icon
+                .imageScale(.medium)
+                .foregroundColor(Color(.white))
+                .background(
+                    RoundedRectangle(cornerRadius: 7 * size)
+                        .frame(width: 28 * size, height: 28 * size)
+                        .foregroundColor(color)
+                )
         }
     }
 }

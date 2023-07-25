@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkLogger+URLSessionWebSocketDelegate.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,16 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: URLSessionWebSocketDelegate
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+extension NetworkLogger {
+    static func log(_ webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
+        _debug()
+    }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    static func log(_ webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
+        _debug()
     }
 }

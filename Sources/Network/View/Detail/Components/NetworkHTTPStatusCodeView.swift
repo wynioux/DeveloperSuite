@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkHTTPStatusCodeView.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,45 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Model
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+struct NetworkHTTPStatusCodeView: View {
+    let httpStatusCode: HTTPStatusCode
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    var body: some View {
+        List {
+            Section {
+                Text("Code")
+                    .fixedSize()
+                    .badge(
+                        Text(String(httpStatusCode.rawValue))
+                            .foregroundColor(httpStatusCode.color)
+                    )
+
+                Text("Title")
+                    .fixedSize()
+                    .badge(
+                        Text(httpStatusCode.title)
+                            .foregroundColor(httpStatusCode.color)
+                    )
+            } footer: {
+                Text(httpStatusCode.description)
+            }
         }
+        .navigationTitle("Status Code")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: Preview
+
+struct NetworkHTTPStatusCodeView_Previews: PreviewProvider {
+    static let httpStatusCode: HTTPStatusCode = .unavailableForLegalReasons
+
+    static var previews: some View {
+        NetworkHTTPStatusCodeView(httpStatusCode: httpStatusCode)
     }
 }

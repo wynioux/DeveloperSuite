@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeveloperSuiteLogHandler.swift
+//  Log
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,30 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
+/*
+import Logging
 
-// MARK: App
+// MARK: DeveloperSuiteLogHandler
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct DeveloperSuiteLogHandler: LogHandler {
+    // MARK: Properties
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    public let label: String
+    public var logLevel: Logger.Level = .info
+    public var metadata: Logger.Metadata = .init()
+
+    public init(label: String) {
+        self.label = label
+    }
+    
+    public func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
+        print("DeveloperSuiteLog")
+    }
+
+    public subscript(metadataKey key: String) -> Logger.Metadata.Value? {
+        get { return metadata[key] }
+        set { metadata[key] = newValue }
     }
 }
+*/

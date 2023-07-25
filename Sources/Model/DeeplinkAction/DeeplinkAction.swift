@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeeplinkAction.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: DeeplinkAction
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
-    }
+public enum DeeplinkAction: String, CaseIterable, Equatable {
+    case open
+    case close
+    case bundle
+    case deeplink
+    case device
+    case logs
+    case network
+    case notification
+    case userdefaults
+    case permission
+    case settings
+    case unknown
 }

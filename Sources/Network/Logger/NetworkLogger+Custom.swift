@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkLogger+Custom.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Custom
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension NetworkLogger {
+    static func log(_ task: URLSessionTask, didFinishDecodingWithError error: Error?) {
+        _debug()
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        guard let error = error as? DecodingError else { return }
+
+        store.perform { context in
+            guard let entity = getEntity(from: task) else { return }
+
+            entity.rawState = 3
+            entity.error = .init(context: context, error: error)
         }
     }
 }

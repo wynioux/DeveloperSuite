@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  IdentifiableEntity.swift
+//  Persistence
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,10 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: IdentifiableEntity
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
-    }
+public protocol IdentifiableEntity: NSManagedObject, Identifiable {
+    var id: UUID { get set }
 }

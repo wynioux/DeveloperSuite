@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeeplinkLogger.swift
+//  Deeplink
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,26 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
+import Persistence
 
-// MARK: App
+// MARK: DeeplinkLogger
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public enum DeeplinkLogger {
+    static var store: PersistentStore {
+        return Persistence.default.store
+    }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    public static func log(_ url: URL) {
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              urlComponents.host != Deeplink.Configuration.host
+        else { return }
+
+        store.perform { context in
+            DeeplinkEntity(
+                context: context,
+                url: url
+            )
         }
     }
 }

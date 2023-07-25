@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NSString+Ranges.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,27 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
+import Model
 
-// MARK: App
+// MARK: Ranges
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension NSString {
+    func ranges(of substring: String, options: SearchOptions) -> [NSRange] {
+        var ranges = [NSRange]()
+        var startIndex = 0
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        let substring = options.kind == .wildcard ? SearchOptions.regexForWildcard(substring, matchingRule: options.matchingRule) : substring
+        let options = NSString.CompareOptions(options)
+
+        while startIndex < length {
+            let range = range(of: substring, options: options, range: NSRange(location: startIndex, length: length - startIndex), locale: nil)
+            if range.location == NSNotFound {
+                return ranges
+            }
+            ranges.append(range)
+            startIndex = range.upperBound
         }
+        return ranges
     }
 }

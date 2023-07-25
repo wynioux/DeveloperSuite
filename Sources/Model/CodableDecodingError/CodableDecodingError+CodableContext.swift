@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  CodableDecodingError+CodableContext.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,20 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: CodableContext
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension CodableDecodingError {
+    struct CodableContext: Sendable, Codable, CustomDebugStringConvertible {
+        public let codingPath: [CodableCodingKey]
+        public let debugDescription: String
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        public init(_ context: DecodingError.Context) {
+            self.codingPath = context.codingPath.map(CodableCodingKey.init)
+            self.debugDescription = context.debugDescription
         }
+
+        public var formattedPath: String { codingPath.map(\.debugDescription).joined(separator: ".") }
     }
 }

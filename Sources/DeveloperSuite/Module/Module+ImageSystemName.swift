@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Module+ImageSystemName.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,32 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import UIKit
 
-// MARK: App
+// MARK: ImageSystemName
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+extension Module {
+    var imageSystemName: String {
+        switch self {
+        // swiftformat:disable all
+        case .bundle:       return "app"
+        case .deeplink:     return "app.connected.to.app.below.fill"
+        case .device:
+            switch UIDevice.current.userInterfaceIdiom {
+            case .phone: return "iphone"
+            case .pad:   return "ipad"
+            case .tv:    return "appletv"
+            case .mac:   return "macpro.gen3.fill"
+            default:     return "apple.logo"
+            }
+            
+        case .logs:         return "doc.plaintext"
+        case .network:      return "network"
+        case .notification: return "app.badge"
+        case .userdefaults: return "list.bullet.rectangle"
+        case .permission:   return "lock"
+        case .settings:     return "gearshape"
+        // swiftformat:enable all
         }
     }
 }

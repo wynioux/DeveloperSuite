@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkMetricsEntity.swift
+//  Persistence
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,34 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: NetworkMetricsEntity
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public final class NetworkMetricsEntity: NSManagedObject {
+    // MARK: Properties
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    @NSManaged public var duration: Double
+
+    // MARK: Convenience Initializer
+
+    public convenience init(context: NSManagedObjectContext, metrics: URLSessionTaskMetrics) {
+        self.init(context: context)
+
+        self.duration = metrics.taskInterval.duration
+    }
+}
+
+// MARK: Functional Extension
+
+extension NetworkMetricsEntity {
+    static func description() -> NSEntityDescription {
+        let entityDescription: NSEntityDescription = .init(for: Self.self)
+
+        entityDescription.properties = [
+            NSAttributeDescription(name: "duration", attributeType: .doubleAttributeType)
+        ]
+
+        return entityDescription
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkLogger+URLSessionDownloadDelegate.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,20 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: URLSessionDownloadDelegate
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+extension NetworkLogger {
+    static func log(_ downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        _debug()
+    }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    static func log(_ downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        _debug()
+    }
+
+    static func log(_ downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        _debug()
     }
 }

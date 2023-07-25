@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Persistence.swift
+//  Persistence
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,15 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Persistence
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public final class Persistence {
+    public static let `default` = Persistence(store: .preview)
+    public let store: PersistentStore
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    init(store: PersistentStore) {
+        self.store = store
     }
 }

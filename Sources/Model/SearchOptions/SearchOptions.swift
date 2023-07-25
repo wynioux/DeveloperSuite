@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  SearchOptions.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,33 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: SearchOptions
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct SearchOptions: Equatable, Hashable, Codable {
+    public static let `default` = SearchOptions()
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    public var kind: Kind = .text
+    public var caseSensitivity: CaseSensitivity = .ignoringCase
+    public var matchingRule: MatchingRule = .contains
+
+    public func eligibleMatchingRules() -> [MatchingRule]? {
+        switch kind {
+        case .text, .wildcard: return MatchingRule.allCases
+        case .regex: return nil
+        }
+    }
+
+    public static func regexForWildcard(_ pattern: String, matchingRule: MatchingRule) -> String {
+        let pattern = NSRegularExpression.escapedPattern(for: pattern)
+            .replacingOccurrences(of: "\\?", with: ".")
+            .replacingOccurrences(of: "\\*", with: "[^\\s]*")
+
+        switch matchingRule {
+        case .begins: return "^" + pattern
+        case .contains: return pattern
+        case .ends: return pattern + "$"
         }
     }
 }

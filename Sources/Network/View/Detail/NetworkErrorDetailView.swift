@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkErrorDetailView.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,42 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Persistence
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+struct NetworkErrorDetailView: View {
+    @ObservedObject var entity: NetworkErrorEntity
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    var body: some View {
+        List {
+            Section {
+                Text(entity.rawLocalizedDescription)
+
+                Text("Code")
+                    .badge(entity.rawCode)
+
+                NavigationLink {
+                    List {
+                        Text(entity.underlyingError?.debugDescription ?? entity.rawDebugDescription)
+                            .font(.system(.footnote, design: .monospaced))
+                            .foregroundColor(Color(.secondaryLabel))
+                    }
+                    .navigationTitle("Debug Description")
+                } label: {
+                    Text("Debug Description")
+                }
+            }
         }
+        .navigationTitle(entity.underlyingError?.domain ?? entity.rawDomain)
+    }
+}
+
+// MARK: Preview
+
+struct NetworkErrorDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NetworkErrorDetailView(entity: NetworkErrorEntity())
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  CachePolicy+Description.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,36 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Description
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+public extension URLRequest.CachePolicy {
+    var description: String {
+        switch self {
+        case .useProtocolCachePolicy:
+            return "UseProtocolCachePolicy"
+            
+        case .reloadIgnoringLocalCacheData:
+            return "ReloadIgnoringLocalCacheData"
+            
+        case .reloadIgnoringLocalAndRemoteCacheData:
+            return "ReloadIgnoringLocalAndRemoteCacheData"
+            
+        case .reloadIgnoringCacheData:
+            return "ReloadIgnoringCacheData"
+            
+        case .returnCacheDataElseLoad:
+            return "ReturnCacheDataElseLoad"
+            
+        case .returnCacheDataDontLoad:
+            return "ReturnCacheDataDontLoad"
+            
+        case .reloadRevalidatingCacheData:
+            return "ReloadRevalidatingCacheData"
+            
+        @unknown default:
+            return "Unknown"
         }
     }
 }

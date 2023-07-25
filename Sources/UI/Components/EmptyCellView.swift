@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  EmptyCellView.swift
+//  UI
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct EmptyCellView: View {
+    public init() {}
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    public var body: some View {
+        Text("Empty")
+            .font(.callout)
+            .foregroundColor(Color(.secondaryLabel))
+    }
+}
+
+// MARK: Preview
+
+struct EmptyCellView_Previews: PreviewProvider {
+    static var previews: some View {
+        EmptyCellView()
     }
 }

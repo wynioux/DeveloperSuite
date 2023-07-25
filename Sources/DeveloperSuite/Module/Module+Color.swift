@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  Module+Color.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: Color
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+extension Module {
+    var color: Color {
+        switch self {
+        // swiftformat:disable all
+        case .bundle:       return Color(.systemRed)
+        case .deeplink:     return Color(.systemOrange)
+        case .device:       return Color(.systemYellow)
+        case .logs:         return Color(.systemGreen)
+        case .network:      return Color(.systemMint)
+        case .notification: return Color(.systemTeal)
+        case .userdefaults: return Color(.systemCyan)
+        case .permission:   return Color(.systemIndigo)
+        case .settings:     return Color(.systemPurple)
+        // swiftformat:enable all
         }
     }
 }

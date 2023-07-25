@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  String+Ranges.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,26 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
+import Model
 
-// MARK: App
+// MARK: Ranges
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension String {
+    func ranges(of target: String, options: SearchOptions) -> [Range<String.Index>] {
+        var ranges = [Range<String.Index>]()
+        var startIndex = target.startIndex
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        let target = options.kind == .wildcard ? SearchOptions.regexForWildcard(target, matchingRule: options.matchingRule) : target
+        let options = String.CompareOptions(options)
+
+        while startIndex < endIndex,
+              let range = range(of: target, options: options, range: startIndex ..< endIndex, locale: nil)
+        {
+            ranges.append(range)
+            startIndex = range.upperBound
         }
+
+        return ranges
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkServiceType+Description.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,41 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Description
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+public extension URLRequest.NetworkServiceType {
+    var description: String {
+        switch self {
+        case .default:
+            return "Standard Internet Traffic"
+        case .voip:
+            return "Voice Over IP Control Traffic"
+            
+        case .video:
+            return "Video Traffic"
+            
+        case .background:
+            return "Background Traffic"
+            
+        case .voice:
+            return "Voice Data"
+            
+        case .responsiveData:
+            return "Responsive Data"
+            
+        case .avStreaming:
+            return "Multimedia Audio/Video Streaming"
+            
+        case .responsiveAV:
+            return "Responsive Multimedia Audio/Video"
+            
+        case .callSignaling:
+            return "Call Signaling"
+            
+        @unknown default:
+            return "Unknown"
         }
     }
 }

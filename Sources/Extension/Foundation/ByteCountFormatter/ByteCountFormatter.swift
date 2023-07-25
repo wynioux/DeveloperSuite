@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  ByteCountFormatter+Cell.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,16 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Cell
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension ByteCountFormatter {
+    static let cell: ByteCountFormatter = {
+        let byteCountFormatter = ByteCountFormatter()
+        byteCountFormatter.countStyle = .binary
+        byteCountFormatter.allowsNonnumericFormatting = false
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
-    }
+        return byteCountFormatter
+    }()
 }

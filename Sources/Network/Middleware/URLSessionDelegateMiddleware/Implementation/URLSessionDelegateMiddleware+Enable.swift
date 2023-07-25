@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  URLSessionDelegateMiddleware+Enable.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: _init
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+private extension URLSession {
+    @objc class func _init(configuration: URLSessionConfiguration, delegate: URLSessionDelegate?, delegateQueue queue: OperationQueue?) -> URLSession {
+        return _init(configuration: configuration, delegate: URLSessionDelegateMiddleware(urlSessionDelegate: delegate), delegateQueue: queue)
+    }
+}
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+// MARK: Enable
+
+public extension URLSessionDelegateMiddleware {
+    static func enable() {
+        guard let original = class_getClassMethod(URLSession.self, #selector(URLSession.init(configuration:delegate:delegateQueue:))),
+              let proxy = class_getClassMethod(URLSession.self, #selector(URLSession._init(configuration:delegate:delegateQueue:)))
+        else { return }
+
+        method_exchangeImplementations(original, proxy)
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  SearchMatch.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,16 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import UIKit
 
-// MARK: App
+// MARK: SearchMatch
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct SearchMatch {
+    public let range: NSRange
+    public let originalForegroundColor: UIColor
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    public init(range: NSRange, originalForegroundColor: UIColor) {
+        self.range = range
+        self.originalForegroundColor = originalForegroundColor
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeveloperSuiteViewModifier.swift
+//  DeveloperSuite
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,39 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: DeveloperSuiteViewModifier
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+private struct DeveloperSuiteViewModifier: ViewModifier {
+    @ObservedObject private var suite: DeveloperSuite = .default
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+                .zIndex(1)
+
+            if suite.isPresented {
+                ModuleListView()
+                    .zIndex(2)
+                    .transition(.move(edge: .bottom))
+            }
         }
+        .animation(.linear(duration: 0.2), value: suite.isPresented)
+        .onOpenURL { url in
+            suite.deeplink.logger.log(url)
+
+            guard let (action, queryItems) = suite.deeplink.actionHandler.handle(url) else { return }
+
+            suite.handle(action: action, with: queryItems)
+        }
+    }
+}
+
+// MARK: DeveloperSuite
+
+public extension View {
+    func developerSuite() -> some View {
+        modifier(DeveloperSuiteViewModifier())
     }
 }

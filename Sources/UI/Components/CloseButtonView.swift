@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  CloseButtonView.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,29 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct CloseButtonView: View {
+    public init() {}
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    public var body: some View {
+        Circle()
+            .fill(Color(.secondarySystemFill))
+            .frame(width: 30, height: 30)
+            .overlay(
+                Image(systemName: "xmark")
+                    .font(.system(.caption, design: .rounded).weight(.bold))
+                    .foregroundColor(Color(.secondaryLabel))
+            )
+    }
+}
+
+// MARK: Preview
+
+struct CloseButtonView_Previews: PreviewProvider {
+    static var previews: some View {
+        CloseButtonView()
     }
 }

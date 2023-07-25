@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NSEntityDescription+Convenience.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,14 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import CoreData
 
-// MARK: App
+// MARK: Convenience
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+public extension NSEntityDescription {
+    convenience init<T: NSManagedObject>(for class: T.Type) {
+        self.init()
+        self.name = String(describing: T.self)
+        self.managedObjectClassName = NSStringFromClass(T.self)
     }
 }

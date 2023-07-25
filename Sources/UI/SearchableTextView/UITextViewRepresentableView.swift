@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  UITextViewRepresentableView.swift
+//  UI
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,36 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+struct UITextViewRepresentableView: View {
+    @Environment(\.isSearching) private var isSearching
+    @ObservedObject var viewModel: SearchableTextViewModel
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    private var showSearchToolbar: Bool {
+        return isSearching || !viewModel.matches.isEmpty
+    }
+
+    var body: some View {
+        UITextViewRepresentable(viewModel: viewModel)
+            .edgesIgnoringSafeArea([.bottom])
+            .overlay {
+                if showSearchToolbar {
+                    SearchToolbarView(viewModel: viewModel)
+                        .padding(.trailing)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                }
+            }
+            .animation(.linear, value: showSearchToolbar)
+    }
+}
+
+// MARK: Preview
+
+struct UITextViewRepresentableView_Previews: PreviewProvider {
+    static var previews: some View {
+        UITextViewRepresentableView(viewModel: .init())
     }
 }

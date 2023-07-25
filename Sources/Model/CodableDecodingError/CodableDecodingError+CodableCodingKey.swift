@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  CodableDecodingError+CodableCodingKey.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,29 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: CodableContext
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension CodableDecodingError {
+    enum CodableCodingKey: Sendable, Hashable, Codable, CustomDebugStringConvertible {
+        case stringValue(String)
+        case intValue(Int)
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        public var debugDescription: String {
+            switch self {
+            case .stringValue(let stringValue): return stringValue
+            case .intValue(let intValue): return String(intValue)
+            }
+        }
+
+        public init(_ codingKey: CodingKey) {
+            guard let intValue = codingKey.intValue else {
+                self = .stringValue(codingKey.stringValue)
+                return
+            }
+
+            self = .intValue(intValue)
         }
     }
 }

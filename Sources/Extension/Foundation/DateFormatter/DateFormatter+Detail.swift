@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DateFormatter+Detail.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,18 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: Detail
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension DateFormatter {
+    static let detail: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM, EEE, HH:mm:ss"
+        formatter.locale = .autoupdatingCurrent
+        formatter.timeZone = .autoupdatingCurrent
+        formatter.calendar = .autoupdatingCurrent
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
-    }
+        return formatter
+    }()
 }

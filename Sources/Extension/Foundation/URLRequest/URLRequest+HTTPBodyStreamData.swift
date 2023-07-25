@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  URLRequest+HTTPBodyStreamData.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,31 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: HTTPBodyStreamData
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension URLRequest {
+    func httpBodyStreamData() -> Data? {
+        guard let httpBodyStream else { return nil }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        let bufferSize = 1024
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+
+        httpBodyStream.open()
+
+        defer {
+            buffer.deallocate()
+            httpBodyStream.close()
         }
+
+        var bodyStreamData = Data()
+
+        while httpBodyStream.hasBytesAvailable {
+            let readData = httpBodyStream.read(buffer, maxLength: bufferSize)
+            bodyStreamData.append(buffer, count: readData)
+        }
+
+        return bodyStreamData
     }
 }

@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  CompareOptions+SearchOptions.swift
+//  Extension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,39 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
+import Model
 
-// MARK: App
+// MARK: SearchOptions
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public extension String.CompareOptions {
+    init(_ options: SearchOptions) {
+        self.init()
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+        if options.kind == .regex || options.kind == .wildcard {
+            insert(.regularExpression)
+        }
+
+        switch options.caseSensitivity {
+        case .ignoringCase:
+            insert(.caseInsensitive)
+
+        case .matchingCase:
+            break
+        }
+
+        if options.kind == .text {
+            switch options.matchingRule {
+            case .begins:
+                insert(.anchored)
+
+            case .contains:
+                break
+
+            case .ends:
+                insert(.anchored)
+                insert(.backwards)
+            }
         }
     }
 }

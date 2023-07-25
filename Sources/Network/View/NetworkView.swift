@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkView.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,30 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Persistence
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public struct NetworkView: View {
+    @Binding var queryItems: [URLQueryItem]?
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    public init(queryItems: Binding<[URLQueryItem]?>) {
+        _queryItems = queryItems
+    }
+
+    public var body: some View {
+        NetworkListView(queryItems: $queryItems)
+            .navigationTitle("Network")
+            .navigationBarTitleDisplayMode(.automatic)
+            .environment(\.managedObjectContext, Persistence.default.store.viewContext)
+    }
+}
+
+// MARK: Preview
+
+struct NetworkView_Previews: PreviewProvider {
+    static var previews: some View {
+        NetworkView(queryItems: .constant(nil))
     }
 }

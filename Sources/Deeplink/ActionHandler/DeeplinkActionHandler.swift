@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeeplinkActionHandler.swift
+//  Deeplink
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,18 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
+import Model
 
-// MARK: App
+// MARK: DeeplinkActionHandler
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+public enum DeeplinkActionHandler {
+    public static func handle(_ url: URL) -> (action: DeeplinkAction, queryItems: [URLQueryItem]?)? {
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              urlComponents.host == Deeplink.Configuration.host,
+              !urlComponents.path.isEmpty
+        else { return nil }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+        return (.init(rawValue: urlComponents.path.replacingOccurrences(of: "/", with: ""))!, urlComponents.queryItems)
     }
 }

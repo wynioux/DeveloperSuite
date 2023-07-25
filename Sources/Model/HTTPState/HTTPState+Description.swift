@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  HTTPState+Description.swift
+//  Model
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,41 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Foundation
+
+// MARK: Description
+
+public extension HTTPState {
+    var description: String {
+        switch self {
+        case .pending: return "Pending"
+        case .success: return "Success"
+        case .error: return "Error"
+        case .decodingError: return "Decoding Error"
+        }
+    }
+}
+
 import SwiftUI
 
-// MARK: App
+public extension HTTPState {
+    var color: Color {
+        switch self {
+        case .pending: return Color(.systemYellow)
+        case .success: return Color(.systemGreen)
+        case .error: return Color(.systemRed)
+        case .decodingError: return Color(.systemPurple)
+        }
+    }
+}
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+public extension HTTPState {
+    var systemImageName: String {
+        switch self {
+        case .pending: return "clock.fill"
+        case .success: return "checkmark.circle.fill"
+        case .error: return "exclamationmark.circle.fill"
+        case .decodingError: return "xmark.circle.fill"
         }
     }
 }

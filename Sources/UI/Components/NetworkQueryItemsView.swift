@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkQueryItemsView.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,35 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
 import SwiftUI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+struct NetworkQueryItemsView: View {
+    let queryItems: [URLQueryItem]
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    var body: some View {
+        List {
+            ForEach(queryItems.sorted(by: { $0.name > $1.name }), id: \.hashValue) { item in
+                Text(item.name)
+                    .fixedSize()
+                    .badge(item.value ?? "")
+            }
         }
+        .navigationTitle("Query Items")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: Preview
+
+struct NetworkQueryItemsDetailView_Previews: PreviewProvider {
+    static let queryItems: [URLQueryItem] = [
+        .init(name: "nickname", value: "wynioux"),
+        .init(name: "projectStart", value: "2023")
+    ]
+
+    static var previews: some View {
+        NetworkQueryItemsView(queryItems: queryItems)
     }
 }

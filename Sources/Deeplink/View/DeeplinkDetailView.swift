@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  DeeplinkDetailView.swift
+//  Deeplink
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,38 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
+import Persistence
 import SwiftUI
+import UI
 
-// MARK: App
+// MARK: View
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+struct DeeplinkDetailView: View {
+    @ObservedObject var entity: DeeplinkEntity
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
+    var body: some View {
+        List {
+            Text("Created At")
+                .badge(DateFormatter.detail.string(from: entity.createdAt))
+
+            if let urlComponents = entity.urlComponents {
+                NavigationLink {
+                    NetworkURLComponentsView(urlComponents: urlComponents)
+                } label: {
+                    Text("URL")
+                        .badge((urlComponents.host ?? "") + urlComponents.path)
+                }
+            }
         }
+        .navigationTitle((entity.urlComponents?.host ?? "") + (entity.urlComponents?.path ?? ""))
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: Preview
+
+struct DeeplinkDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        DeeplinkDetailView(entity: DeeplinkEntity())
     }
 }

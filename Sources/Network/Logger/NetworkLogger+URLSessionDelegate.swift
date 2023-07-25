@@ -1,6 +1,6 @@
 //
-//  iOS_ExampleApp.swift
-//  iOS Example
+//  NetworkLogger+URLSessionDelegate.swift
+//  Network
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,19 +23,20 @@
 //  THE SOFTWARE.
 //
 
-import DeveloperSuite
-import SwiftUI
+import Foundation
 
-// MARK: App
+// MARK: URLSessionDelegate
 
-@main
-struct iOS_ExampleApp: App {
-    init() {}
+extension NetworkLogger {
+    static func log(sessionDidBecomeInvalidWithError error: Error?) {
+        _debug()
+    }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .developerSuite()
-        }
+    static func log(sessionDidReceive challenge: URLAuthenticationChallenge, authChallengeDisposition: URLSession.AuthChallengeDisposition, urlCredential: URLCredential?) {
+        _debug()
+    }
+
+    static func log(sessionDidFinishEventsForBackground session: URLSession) {
+        _debug()
     }
 }
