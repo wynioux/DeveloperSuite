@@ -10,24 +10,24 @@ _DeveloperSuite offers an array of detailed information on various aspects of th
 
 ## Features
 
-- [ ] [Bundle](#bundle)
+- [ ] Bundle
   - [ ] Info.plist
-- [x] [Deeplink](#deeplink)
+- [x] Deeplink
   - [x] Deeplink Logging (**no code required**)
-- [ ] [Device](#device)
+- [ ] [-Device
   - [ ] MachO
   - [ ] MobileGestalt.plist
   - [ ] ProcessInfo
-- [x] [Log](#log)
+- [x] Log
   - [x] Native
-  - [x] [swift-log](https://github.com/apple/swift-log) support
-- [x] [Network](#network)
+  - [x] Support for [SwiftLog](https://github.com/apple/swift-log) backend
+- [x] Network
   - [x] URLSession Logging (**no code required**)
   - [x] URLSession.shared Logging (**no code required**)
-  - [x] [Alamofire](https://github.com/Alamofire/Alamofire) support
-- [ ] [Notification](#notification)
-- [ ] [UserDefaults](#userdefaults)
-- [ ] [Permission](#permission)
+  - [x] Automatically supports URLSession based frameworks like [Alamofire](https://github.com/Alamofire/Alamofire)
+- [ ] Notification
+- [ ] UserDefaults
+- [ ] Permission
 
 ## Installation
 
@@ -42,6 +42,12 @@ You can add DeveloperSuite to an Xcode project by adding it as a package depende
 2. Paste the following into the URL field: https://github.com/wynioux/DeveloperSuite/
 
 ## Getting Started
+
+## Minimum Requirements
+
+| Swift     | Platforms                                      |
+| --------- | ---------------------------------------------- |
+| Swift 5.7 | iOS 15.0, iPadOS 15.0, watchOS 8.0, macOS 12.0 |
 
 ## Credits
 
