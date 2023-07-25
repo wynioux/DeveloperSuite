@@ -23,38 +23,34 @@
 //  THE SOFTWARE.
 //
 
-import Deeplink
-import Foundation
-import Log
-import Model
-import Network
-import Persistence
-
-@_exported import struct Log.DeveloperSuiteLogHandler
+import DSDeeplink
+import DSLog
+import DSModel
+import DSNetwork
+import DSPersistence
+import SwiftUI
 
 // MARK: DeveloperSuite
 
 public final class DeveloperSuite: ObservableObject {
     // MARK: Properties
 
-    public static let `default` = DeveloperSuite(deeplink: .default, log: .default, network: .default, persistence: .default)
+    public static let `default` = DeveloperSuite(deeplink: .default, network: .default, persistence: .default)
 
     // State
-    @Published private(set) var isPresented: Bool = false
+    @Published private(set) var presented: Bool = false
     @Published var queryItems: [URLQueryItem]? = nil
     @Published var selectedModule: Module?
 
     // API
     internal let deeplink: Deeplink
-    public let log: Log
-    public let network: Network
+    internal let network: Network
     internal let persistence: Persistence
 
     // MARK: Initializer
 
-    init(deeplink: Deeplink, log: Log, network: Network, persistence: Persistence) {
+    init(deeplink: Deeplink, network: Network, persistence: Persistence) {
         self.deeplink = deeplink
-        self.log = log
         self.network = network
         self.persistence = persistence
     }
@@ -64,34 +60,32 @@ public final class DeveloperSuite: ObservableObject {
         selectedModule = nil
     }
 
-    private func open(selectedModule: Module? = nil, with queryItems: [URLQueryItem]? = nil) {
+    func open(selectedModule: Module? = nil, with queryItems: [URLQueryItem]? = nil) {
         resetSelectedModule()
 
         self.selectedModule = selectedModule
         self.queryItems = queryItems
 
-        isPresented = true
+        presented = true
     }
 
     func close() {
-        isPresented = false
+        presented = false
     }
 
-    func handle(action: DeeplinkAction, with queryItems: [URLQueryItem]? = nil) {
-        switch action {
+    @ViewBuilder
+    func createDestinationView(for module: Module, with queryItems: Binding<[URLQueryItem]?>) -> some View {
+        switch module {
         // swiftformat:disable all
-        case .open:         open()
-        case .close:        close()
-        case .bundle:       open(selectedModule: .bundle, with: queryItems)
-        case .deeplink:     open(selectedModule: .deeplink, with: queryItems)
-        case .device:       open(selectedModule: .device, with: queryItems)
-        case .log:          open(selectedModule: .log, with: queryItems)
-        case .network:      open(selectedModule: .network, with: queryItems)
-        case .notification: open(selectedModule: .notification, with: queryItems)
-        case .userdefaults: open(selectedModule: .userdefaults, with: queryItems)
-        case .permission:   open(selectedModule: .permission, with: queryItems)
-        case .settings:     open(selectedModule: .settings, with: queryItems)
-        case .unknown:      break
+        case .bundle:       EmptyView()
+        case .deeplink:     DeeplinkView(queryItems: queryItems)
+        case .device:       EmptyView()
+        case .log:          LogView(queryItems: queryItems)
+        case .network:      NetworkView(queryItems: queryItems)
+        case .notification: EmptyView()
+        case .userdefaults: EmptyView()
+        case .permission:   EmptyView()
+        case .settings:     EmptyView()
         // swiftformat:enable all
         }
     }
@@ -101,6 +95,6 @@ public final class DeveloperSuite: ObservableObject {
 
 extension DeveloperSuite {
     enum Configuration {
-        static let version: String = "0.0.1-alpha.1"
+        static let version: String = "0.0.1-alpha.2"
     }
 }

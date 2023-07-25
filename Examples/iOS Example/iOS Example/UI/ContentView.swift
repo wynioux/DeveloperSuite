@@ -25,7 +25,7 @@
 
 import Alamofire
 import DeveloperSuite
-// import Logging
+import Logging
 import SwiftUI
 
 final class Custom {
@@ -41,13 +41,9 @@ final class Custom {
 // MARK: View
 
 struct ContentView: View {
-    /*
-     let logger = Logger(label: "io.github.wynioux.iOSExample")
-
-     init() {
-         LoggingSystem.bootstrap(DeveloperSuiteLogHandler.init)
-     }
-     */
+    init() {
+        LoggingSystem.bootstrap(DeveloperSuiteLogHandler.init)
+    }
 
     var body: some View {
         VStack {
@@ -139,7 +135,11 @@ struct ContentView: View {
     }
 
     func performLog() {
-        logger.info("Test")
+        let swiftLogger = Logger(label: "io.github.wynioux.iOSExample")
+        swiftLogger.trace("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur tortor a faucibus. Nullam nec neque eget enim pulvinar fringilla. Morbi eget est tortor. Sed interdum turpis vel augue efficitur, id rhoncus dui sagittis.")
+
+        let developerSuiteLogger = LogLogger(label: "io.github.wynioux.iOSExample")
+        developerSuiteLogger.trace("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur tortor a faucibus. Nullam nec neque eget enim pulvinar fringilla. Morbi eget est tortor. Sed interdum turpis vel augue efficitur, id rhoncus dui sagittis.")
     }
 }
 
@@ -151,7 +151,9 @@ struct HTTPBinResponse: Codable {
 final class TestEventMonitor: EventMonitor {
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
         guard let task = request.task else { return }
-        DeveloperSuite.default.network.logger.log(task, didFinishDecodingWithError: response.error?.underlyingError)
+
+        let networkLogger = NetworkLogger.default
+        networkLogger.log(task, didFinishDecodingWithError: response.error?.underlyingError)
     }
 }
 

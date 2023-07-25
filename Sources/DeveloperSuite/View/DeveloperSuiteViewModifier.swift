@@ -23,31 +23,42 @@
 //  THE SOFTWARE.
 //
 
+import DSModel
+import DSUI
 import SwiftUI
 
 // MARK: DeveloperSuiteViewModifier
 
 private struct DeveloperSuiteViewModifier: ViewModifier {
     @ObservedObject private var suite: DeveloperSuite = .default
+    @ScaledMetric private var size: CGFloat = 1
 
     func body(content: Content) -> some View {
         ZStack {
             content
                 .zIndex(1)
 
-            if suite.isPresented {
-                ModuleListView()
-                    .zIndex(2)
-                    .transition(.move(edge: .bottom))
+            if suite.presented {
+                NavigationView {
+                    List {
+                        ForEach(Module.allCases, id: \.self) { module in
+                            ModuleCellView(suite: suite, module: module)
+                        }
+                    }
+                    .navigationTitle("Developer Suite")
+                    .toolbar { CloseToolbarItem(close: suite.close) }
+                }
+                .navigationViewStyle(.stack)
+                .environment(\.managedObjectContext, suite.persistence.store.viewContext)
+                .zIndex(2)
+                .transition(.move(edge: .bottom))
             }
         }
-        .animation(.linear(duration: 0.2), value: suite.isPresented)
+        .animation(.linear(duration: 0.2), value: suite.presented)
         .onOpenURL { url in
             suite.deeplink.logger.log(url)
-
-            guard let (action, queryItems) = suite.deeplink.actionHandler.handle(url) else { return }
-
-            suite.handle(action: action, with: queryItems)
+            guard let (module, queryItems) = suite.deeplink.resolver.resolve(url) else { return }
+            suite.open(selectedModule: module, with: queryItems)
         }
     }
 }

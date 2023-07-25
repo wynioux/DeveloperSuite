@@ -1,7 +1,5 @@
 // swift-tools-version: 5.7
 
-// 7hqjzrwjg23txuxlsmv5f56pht5sjpbsmmvbtx373ilziot5gyrq
-
 import PackageDescription
 
 let package = Package(
@@ -10,125 +8,42 @@ let package = Package(
         .iOS(.v15)
     ],
     products: [
-        .library(
-            name: "DeveloperSuite",
-            targets: [
-                "DeveloperSuite"
-            ]
-        )
+        .library(name: "DeveloperSuite", targets: ["DeveloperSuite"]),
+        .library(name: "DSDeeplink", targets: ["DSDeeplink"]),
+        .library(name: "DSExtension", targets: ["DSExtension"]),
+        .library(name: "DSLog", targets: ["DSLog"]),
+        .library(name: "DSModel", targets: ["DSModel"]),
+        .library(name: "DSNetwork", targets: ["DSNetwork"]),
+        .library(name: "DSPersistence", targets: ["DSPersistence"]),
+        .library(name: "DSUI", targets: ["DSUI"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
     ],
     targets: [
-        .target(
-            name: "Deeplink",
-            dependencies: [
-                "Persistence"
-            ]
-        ),
-        .testTarget(
-            name: "DeeplinkTests",
-            dependencies: [
-                "Deeplink"
-            ]
-        ),
+        .target(name: "DeveloperSuite", dependencies: ["DSDeeplink", "DSLog", "DSNetwork", "DSPersistence"], path: "Sources/DeveloperSuite"),
+        .testTarget(name: "DeveloperSuiteTests", dependencies: ["DeveloperSuite"], path: "Tests/DeveloperSuiteTests"),
+        
+        .target(name: "DSDeeplink", dependencies: ["DSPersistence", "DSUI"], path: "Sources/DSDeeplink"),
+        .testTarget(name: "DSDeeplinkTests", dependencies: ["DSDeeplink"], path: "Tests/DSDeeplinkTests"),
+        
+        .target(name: "DSExtension", dependencies: ["DSModel"], path: "Sources/DSExtension"),
+        .testTarget(name: "DSExtensionTests", dependencies: ["DSExtension"], path: "Tests/DSExtensionTests"),
 
-        .target(
-            name: "DeveloperSuite",
-            dependencies: [
-                "Deeplink",
-                "Logs",
-                "Network",
-                "Persistence"
-            ]
-        ),
-        .testTarget(
-            name: "DeveloperSuiteTests",
-            dependencies: [
-                "DeveloperSuite"
-            ]
-        ),
-
-        .target(
-            name: "Logs",
-            dependencies: [
-                //.product(name: "Logging", package: "swift-log")
-            ]
-        ),
-        .testTarget(
-            name: "LogsTests",
-            dependencies: [
-                "Logs"
-            ]
-        ),
-
-        .target(
-            name: "Extension",
-            dependencies: [
-                "Model"
-            ]
-        ),
-        .testTarget(
-            name: "ExtensionTests",
-            dependencies: [
-                "Extension"
-            ]
-        ),
-
-        .target(
-            name: "Model",
-            dependencies: []
-        ),
-        .testTarget(
-            name: "ModelTests",
-            dependencies: [
-                "Model"
-            ]
-        ),
-
-        .target(
-            name: "Network",
-            dependencies: [
-                "Extension",
-                "Persistence",
-                "UI"
-            ]
-        ),
-        .testTarget(
-            name: "NetworkTests",
-            dependencies: [
-                "Network"
-            ]
-        ),
-
-        .target(
-            name: "Persistence",
-            dependencies: [
-                "Model"
-            ]
-        ),
-        .testTarget(
-            name: "PersistenceTests",
-            dependencies: [
-                "Persistence"
-            ]
-        ),
-
-        .target(
-            name: "UI",
-            dependencies: [
-                "Persistence"
-            ]
-        ),
-        .testTarget(
-            name: "UITests",
-            dependencies: [
-                "UI"
-            ]
-        )
+        .target(name: "DSLog", dependencies: [.product(name: "Logging", package: "swift-log"), "DSPersistence", "DSUI"], path: "Sources/DSLog"),
+        .testTarget(name: "DSLogTests", dependencies: ["DSLog"], path: "Tests/DSLogTests"),
+        
+        .target(name: "DSModel", dependencies: [], path: "Sources/DSModel"),
+        .testTarget(name: "DSModelTests", dependencies: [], path: "Tests/DSModelTests"),
+        
+        .target(name: "DSNetwork", dependencies: ["DSExtension", "DSPersistence", "DSUI"], path: "Sources/DSNetwork"),
+        .testTarget(name: "DSNetworkTests", dependencies: ["DSNetwork"], path: "Tests/DSNetworkTests"),
+        
+        .target(name: "DSPersistence", dependencies: ["DSExtension", "DSModel"], path: "Sources/DSPersistence"),
+        .testTarget(name: "DSPersistenceTests", dependencies: ["DSPersistence"], path: "Tests/DSPersistenceTests"),
+        
+        .target(name: "DSUI", dependencies: ["DSPersistence"], path: "Sources/DSUI"),
+        .testTarget(name: "DSUITests", dependencies: ["DSUI"], path: "Tests/DSUITests")
     ],
-    swiftLanguageVersions: [
-        .v5
-    ]
+    swiftLanguageVersions: [.v5]
 )
