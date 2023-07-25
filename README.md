@@ -8,24 +8,26 @@ _DeveloperSuite offers an array of detailed information on various aspects of th
 ![Platforms](https://img.shields.io/badge/Platform-iOS_iPadOS-blue?style=flat-square)
 ![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen?style=flat-square)
 
-- [Features](#features)
-- [Installation](#installation)
-- [Credits](#credits)
-- [License](#license)
-
 ## Features
 
-- [x] Bundle
-  - [x] Info.plist
-- [x] Device
-  - [x] MachO
-  - [x] MobileGestalt.plist
-  - [x] ProcessInfo
-- [ ] Logs
-- [ ] Network
-- [ ] UserDefaults
-
-### Plist
+- [ ] [Bundle](#bundle)
+  - [ ] Info.plist
+- [x] [Deeplink](#deeplink)
+  - [x] Deeplink Logging (**no code required**)
+- [ ] [Device](#device)
+  - [ ] MachO
+  - [ ] MobileGestalt.plist
+  - [ ] ProcessInfo
+- [x] [Log](#log)
+  - [x] Native
+  - [x] [swift-log](https://github.com/apple/swift-log) support
+- [x] [Network](#network)
+  - [x] URLSession Logging (**no code required**)
+  - [x] URLSession.shared Logging (**no code required**)
+  - [x] [Alamofire](https://github.com/Alamofire/Alamofire) support
+- [ ] [Notification](#notification)
+- [ ] [UserDefaults](#userdefaults)
+- [ ] [Permission](#permission)
 
 ## Installation
 
@@ -39,9 +41,13 @@ You can add DeveloperSuite to an Xcode project by adding it as a package depende
 
 2. Paste the following into the URL field: https://github.com/wynioux/DeveloperSuite/
 
+## Getting Started
+
 ## Credits
 
-Special thanks to [ChatGPT](https://openai.com/blog/chatgpt/) for unit tests.
+This Swift package is heavily inspired by the fantastic work of [Pulse](https://github.com/kean/Pulse) by Kean, which served as a valuable source of inspiration and reference for the development of this project.
+
+If you find this package helpful, we encourage you to check out the original project, [Pulse](https://github.com/kean/Pulse), and support its development as well.
 
 ## License
 
