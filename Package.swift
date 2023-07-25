@@ -8,14 +8,14 @@ let package = Package(
         .iOS(.v15)
     ],
     products: [
-        .library(name: "DeveloperSuite", targets: ["DeveloperSuite"]),
-        .library(name: "DSDeeplink", targets: ["DSDeeplink"]),
-        .library(name: "DSExtension", targets: ["DSExtension"]),
-        .library(name: "DSLog", targets: ["DSLog"]),
-        .library(name: "DSModel", targets: ["DSModel"]),
-        .library(name: "DSNetwork", targets: ["DSNetwork"]),
-        .library(name: "DSPersistence", targets: ["DSPersistence"]),
-        .library(name: "DSUI", targets: ["DSUI"])
+        .library(name: "DeveloperSuite", targets: ["DeveloperSuite"])
+        // .library(name: "DSDeeplink", targets: ["DSDeeplink"]),
+        // .library(name: "DSExtension", targets: ["DSExtension"]),
+        // .library(name: "DSLog", targets: ["DSLog"]),
+        // .library(name: "DSModel", targets: ["DSModel"]),
+        // .library(name: "DSNetwork", targets: ["DSNetwork"]),
+        // .library(name: "DSPersistence", targets: ["DSPersistence"]),
+        // .library(name: "DSUI", targets: ["DSUI"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
