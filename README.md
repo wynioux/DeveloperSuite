@@ -14,7 +14,7 @@ _DeveloperSuite offers an array of detailed information on various aspects of th
   - [ ] Info.plist
 - [x] Deeplink
   - [x] Deeplink Logging (**no code required**)
-- [ ] [-Device
+- [ ] Device
   - [ ] MachO
   - [ ] MobileGestalt.plist
   - [ ] ProcessInfo
