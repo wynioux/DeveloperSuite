@@ -94,6 +94,75 @@ struct YourAppNameApp: App {
 }
 ```
 
+5. To log decoding errors in network responses, you need to implement the `NetworkLogger.log(_:didFinishDecodingWithError:)` function from DeveloperSuite.
+
+Here's an example Alamofire implementation:
+
+```swift
+import Alamofire
+import DeveloperSuite
+import Foundation
+
+final class DeveloperSuiteEventMonitor: EventMonitor {
+    let networkLogger = NetworkLogger.default
+
+    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
+        guard let task = request.task else { return }
+        networkLogger.log(task, didFinishDecodingWithError: response.error?.underlyingError)
+    }
+}
+```
+
+```swift
+import Alamofire
+import Foundation
+
+final class NetworkService {
+    let session = Session(eventMonitors: [DeveloperSuiteEventMonitor()])
+
+    ...
+}
+```
+
+### Opening DeveloperSuite with Deep Links
+
+1. You can open DeveloperSuite using deep links in two ways:
+
+Type the following URL in Safari, Notes, or any other app that supports URL linking:
+
+```text
+yourappname://suite
+```
+
+Replace "yourappname" with your actual app's custom URL scheme.
+
+2. In-App
+
+In your app, you can programmatically open DeveloperSuite using the following code:
+
+```swift
+if let url = URL(string: "yourappname://suite") {
+    UIApplication.shared.open(url)
+}
+```
+
+Replace "yourappname" with your actual app's custom URL scheme.
+
+3. Open Other Modules with Deep Links:
+
+To open other modules, replace the last part of the URL with the desired module name. Here are the available options:
+
+- Bundle: "yourappname://suite/bundle"
+- Deeplink: "yourappname://suite/deeplink"
+- Device: "yourappname://suite/device"
+- Log: "yourappname://suite/log"
+- Notification: "yourappname://suite/notification"
+- UserDefaults: "yourappname://suite/userdefaults"
+- Permission: "yourappname://suite/permission"
+- Settings: "yourappname://suite/settings"
+
+That's it! Now users can open `DeveloperSuite` using deep links either by typing the URL directly or using `UIApplication.shared.open(url)` in your app. Enjoy exploring the network logs and debugging your app with ease!
+
 ## Minimum Requirements
 
 | Swift     | Platforms             |
