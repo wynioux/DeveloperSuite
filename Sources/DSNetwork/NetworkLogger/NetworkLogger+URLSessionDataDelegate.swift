@@ -57,6 +57,7 @@ extension NetworkLogger {
             else { return }
 
             response.rawHTTPBody.append(data)
+            response.rawHTTPBodySize = Int64(response.rawHTTPBody.count)
         }
     }
 

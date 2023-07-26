@@ -93,6 +93,6 @@ public final class DeveloperSuite: ObservableObject {
 
 extension DeveloperSuite {
     enum Configuration {
-        static let version: String = "0.0.1-alpha.3"
+        static let version: String = "0.0.1-alpha.4"
     }
 }

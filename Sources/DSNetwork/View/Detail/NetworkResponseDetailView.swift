@@ -85,6 +85,10 @@ struct NetworkResponseDetailView: View {
                         .badge(suggestedFilename)
                 }
 
+                Text("Expected Content Length")
+                    .fixedSize()
+                    .badge(ByteCountFormatter.cell.string(fromByteCount: response.expectedContentLength))
+
                 if let mimeType = response.mimeType {
                     Text("MIME")
                         .fixedSize()
@@ -100,7 +104,7 @@ struct NetworkResponseDetailView: View {
                     {
                         Text("Body")
                             .fixedSize()
-                            .badge(ByteCountFormatter.cell.string(fromByteCount: response.expectedContentLength))
+                            .badge(ByteCountFormatter.cell.string(fromByteCount: response.rawHTTPBodySize))
                     }
                 }
             }
