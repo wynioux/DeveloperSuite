@@ -6,12 +6,12 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>io.github.wynioux.DeveloperSuite.iOSExample</string>
+			<string>io.github.wynioux.DeveloperSuite.Integration</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>iosexample</string>
+				<string>integration</string>
 			</array>
 		</dict>
 	</array>

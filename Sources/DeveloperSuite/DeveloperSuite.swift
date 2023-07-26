@@ -35,7 +35,7 @@ import SwiftUI
 public final class DeveloperSuite: ObservableObject {
     // MARK: Properties
 
-    public static let `default` = DeveloperSuite(deeplink: .default, network: .default, persistence: .default)
+    public static let `default` = DeveloperSuite(deeplink: .default, persistence: .default)
 
     // State
     @Published private(set) var presented: Bool = false
@@ -44,14 +44,12 @@ public final class DeveloperSuite: ObservableObject {
 
     // API
     internal let deeplink: Deeplink
-    internal let network: Network
     internal let persistence: Persistence
 
     // MARK: Initializer
 
-    init(deeplink: Deeplink, network: Network, persistence: Persistence) {
+    init(deeplink: Deeplink, persistence: Persistence) {
         self.deeplink = deeplink
-        self.network = network
         self.persistence = persistence
     }
 
@@ -95,6 +93,6 @@ public final class DeveloperSuite: ObservableObject {
 
 extension DeveloperSuite {
     enum Configuration {
-        static let version: String = "0.0.1-alpha.2"
+        static let version: String = "0.0.1-alpha.3"
     }
 }

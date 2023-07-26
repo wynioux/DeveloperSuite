@@ -35,7 +35,9 @@ struct NetworkErrorDetailView: View {
         List {
             Section {
                 Text(entity.rawLocalizedDescription)
+            }
 
+            Section {
                 Text("Domain")
                     .fixedSize()
                     .badge(entity.underlyingError?.domain ?? entity.rawDomain)

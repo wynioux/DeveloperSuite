@@ -35,8 +35,5 @@ public final class Network {
 
     init(logger: NetworkLogger) {
         self.logger = logger
-
-        URLSessionDelegateMiddleware.enable()
-        URLProtocolMiddleware.shared.enable()
     }
 }

@@ -28,4 +28,6 @@ import Foundation
 @_exported import class DSLog.LogLogger
 @_exported import struct DSLog.DeveloperSuiteLogHandler
 
+@_exported import class DSNetwork.URLProtocolMiddleware
+@_exported import class DSNetwork.URLSessionDelegateMiddleware
 @_exported import class DSNetwork.NetworkLogger

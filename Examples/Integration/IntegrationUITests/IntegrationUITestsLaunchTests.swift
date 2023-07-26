@@ -1,13 +1,14 @@
 //
-//  iOS_ExampleUITestsLaunchTests.swift
-//  iOS ExampleUITests
+//  IntegrationUITestsLaunchTests.swift
+//  IntegrationUITests
 //
-//  Created by Bahadır A. Güder on 26.01.2023.
+//  Created by Bahadır A. Güder on 25.07.2023.
 //
 
 import XCTest
 
-final class iOS_ExampleUITestsLaunchTests: XCTestCase {
+final class IntegrationUITestsLaunchTests: XCTestCase {
+
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

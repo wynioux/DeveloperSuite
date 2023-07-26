@@ -118,7 +118,7 @@ struct NetworkRequestDetailView: View {
                     .fixedSize()
                     .badge(selectedEntity.cachePolicy.description)
 
-                Text("Network Service Type")
+                Text("Network Service")
                     .fixedSize()
                     .badge(selectedEntity.networkServiceType.description)
 

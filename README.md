@@ -1,5 +1,9 @@
 # DeveloperSuite
 
+| Home                                    | Deeplink                                    | Log                               | Network                                   |
+| --------------------------------------- | ------------------------------------------- | --------------------------------- | ----------------------------------------- |
+| ![Module](/Resources/Images/Module.png) | ![Deeplink](/Resources/Images/Deeplink.png) | ![Log](/Resources/Images/Log.png) | ![Network](/Resources/Images/Network.png) |
+
 A comprehensive tool designed to assist developers in debugging and optimizing their applications.
 
 _DeveloperSuite offers an array of detailed information on various aspects of the application; Developers can easily access crucial information pertaining to the application's performance and functionality, facilitating identification and resolution of any issues._
@@ -43,11 +47,58 @@ You can add DeveloperSuite to an Xcode project by adding it as a package depende
 
 ## Getting Started
 
+### Adding URL Types
+
+Follow these steps to add URL Types to your iOS app:
+
+1. Open your Xcode project.
+2. Select your app target from the project navigator.
+3. Go to the "Info" tab.
+4. Look for the "URL Types" section.
+5. If there are no URL Types defined, click the "+" button to add a new URL Type.
+
+![Adding URL Type](/Resources/Images/URLTypes.png)
+
+6. In the URL Schemes field, enter a unique identifier for your app's custom URL scheme. This scheme will be used to launch your app from other apps or web links. For example, if your app's name is "YourAppName", you can use "yourappname" as the URL scheme.
+
+7. Save your changes.
+
+### Collecting Network Logs
+
+To collect network logs using `DeveloperSuite` in your iOS app, follow these steps:
+
+1. First, make sure you have integrated `DeveloperSuite` into your Xcode project. If you haven't, follow the installation instructions provided in the repository.
+
+2. In your Xcode project, navigate to the `@main` struct of your app. This is typically located in the `YourAppName.swift` file.
+
+3. Import the `DeveloperSuite` module at the top of the file:
+
+```swift
+import DeveloperSuite
+```
+
+4. Inside the `@main` struct, add the following lines in the `init()` method:
+
+```swift
+@main
+struct YourAppNameApp: App {
+    init() {
+        // Enable URLProtocolMiddleware to collect `URLSession.shared` network logs
+        URLProtocolMiddleware.shared.enable()
+
+        // Enable URLSessionDelegateMiddleware to collect `URLSession` with delegate network logs
+        URLSessionDelegateMiddleware.enable()
+    }
+
+    // Your app's entry point and other code...
+}
+```
+
 ## Minimum Requirements
 
-| Swift     | Platforms                                      |
-| --------- | ---------------------------------------------- |
-| Swift 5.7 | iOS 15.0, iPadOS 15.0, watchOS 8.0, macOS 12.0 |
+| Swift     | Platforms             |
+| --------- | --------------------- |
+| Swift 5.7 | iOS 15.0, iPadOS 15.0 |
 
 ## Credits
 

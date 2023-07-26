@@ -1,14 +1,15 @@
 //
-//  iOS_ExampleTests.swift
-//  iOS ExampleTests
+//  IntegrationTests.swift
+//  IntegrationTests
 //
-//  Created by Bahadır A. Güder on 26.01.2023.
+//  Created by Bahadır A. Güder on 25.07.2023.
 //
 
-@testable import iOS_Example
 import XCTest
+@testable import Integration
 
-final class iOS_ExampleTests: XCTestCase {
+final class IntegrationTests: XCTestCase {
+
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -31,4 +32,5 @@ final class iOS_ExampleTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+
 }

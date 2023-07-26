@@ -37,8 +37,7 @@ public final class DeeplinkResolver {
 
     public func resolve(_ url: URL) -> (module: Module?, queryItems: [URLQueryItem]?)? {
         guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              urlComponents.host == Deeplink.Configuration.host,
-              !urlComponents.path.isEmpty
+              urlComponents.host == Deeplink.Configuration.host
         else { return nil }
 
         let module = Module(rawValue: urlComponents.path.replacingOccurrences(of: "/", with: ""))
