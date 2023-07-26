@@ -38,7 +38,7 @@ public extension Module {
         case .network:      return "Network"
         case .notification: return "Notification"
         case .userdefaults: return "Userdefaults"
-        case .permission:   return "Permissions"
+        case .permission:   return "Permission"
         case .settings:     return "Settings"
         // swiftformat:enable all
         }
