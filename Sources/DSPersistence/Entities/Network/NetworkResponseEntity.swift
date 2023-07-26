@@ -40,6 +40,7 @@ public final class NetworkResponseEntity: NSManagedObject {
     @NSManaged public var suggestedFilename: String?
     @NSManaged public var expectedContentLength: Int64
     @NSManaged public var rawHTTPBody: Data
+    @NSManaged public var rawHTTPBodySize: Int64
 
     // MARK: Convenience Initializer
 
@@ -61,6 +62,7 @@ public final class NetworkResponseEntity: NSManagedObject {
         self.suggestedFilename = response.suggestedFilename
         self.expectedContentLength = response.expectedContentLength
         self.rawHTTPBody = Data()
+        self.rawHTTPBodySize = 0
     }
 }
 
@@ -99,7 +101,8 @@ extension NetworkResponseEntity {
             NSAttributeDescription(name: "textEncodingName", attributeType: .stringAttributeType, isOptional: true),
             NSAttributeDescription(name: "suggestedFilename", attributeType: .stringAttributeType, isOptional: true),
             NSAttributeDescription(name: "expectedContentLength", attributeType: .integer64AttributeType),
-            NSAttributeDescription(name: "rawHTTPBody", attributeType: .binaryDataAttributeType)
+            NSAttributeDescription(name: "rawHTTPBody", attributeType: .binaryDataAttributeType),
+            NSAttributeDescription(name: "rawHTTPBodySize", attributeType: .integer64AttributeType)
         ]
 
         return entityDescription

@@ -93,7 +93,7 @@ extension NetworkCellView {
 
             Text("\(Image(systemName: "arrow.up")) \(ByteCountFormatter.cell.string(fromByteCount: Int64(entity.originalRequest.rawHTTPBodySize)))")
 
-            Text("\(Image(systemName: "arrow.down")) \(ByteCountFormatter.cell.string(fromByteCount: entity.response?.expectedContentLength ?? 0))")
+            Text("\(Image(systemName: "arrow.down")) \(ByteCountFormatter.cell.string(fromByteCount: Int64(entity.response?.rawHTTPBodySize ?? 0)))")
 
             Text("\(Image(systemName: "clock")) \(DurationFormatter.string(from: TimeInterval(entity.metrics?.duration ?? 0), isPrecise: false))")
         }
