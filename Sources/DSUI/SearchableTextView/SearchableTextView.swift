@@ -36,7 +36,7 @@ public struct SearchableTextView: View {
 
     public var body: some View {
         UITextViewRepresentableView(viewModel: viewModel)
-            .searchable(text: $viewModel.searchText)
+            .searchable(text: $viewModel.searchText, placement: .automatic)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled(true)
     }
