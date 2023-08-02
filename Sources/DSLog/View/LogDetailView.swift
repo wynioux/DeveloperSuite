@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct LogDetailView: View {
     @ObservedObject var entity: LogEntity
 
@@ -86,6 +87,7 @@ struct LogDetailView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct LogDetailView_Previews: PreviewProvider {
     static var previews: some View {
         LogDetailView(entity: LogEntity())

@@ -67,12 +67,15 @@ public final class NetworkRequestEntity: NSManagedObject {
         self.rawMainDocumentURL = request.mainDocumentURL
         self.rawCachePolicy = request.cachePolicy.rawValue
         self.rawNetworkServiceType = request.networkServiceType.rawValue
-        self.rawAttribution = request.attribution.rawValue
         self.rawTimeoutInterval = request.timeoutInterval
         self.allowsCellularAccess = request.allowsCellularAccess
         self.allowsConstrainedNetworkAccess = request.allowsConstrainedNetworkAccess
         self.allowsExpensiveNetworkAccess = request.allowsExpensiveNetworkAccess
-        self.assumesHTTP3Capable = request.assumesHTTP3Capable
+
+        if #available(iOS 15, *) {
+            self.rawAttribution = request.attribution.rawValue
+            self.assumesHTTP3Capable = request.assumesHTTP3Capable
+        }
     }
 }
 
@@ -104,6 +107,7 @@ public extension NetworkRequestEntity {
         return URLRequest.NetworkServiceType(rawValue: rawNetworkServiceType)!
     }
 
+    @available(iOS 15, *)
     var attribution: URLRequest.Attribution {
         return URLRequest.Attribution(rawValue: rawAttribution)!
     }

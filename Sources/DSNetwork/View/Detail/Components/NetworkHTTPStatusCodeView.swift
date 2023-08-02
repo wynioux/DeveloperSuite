@@ -28,6 +28,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkHTTPStatusCodeView: View {
     let httpStatusCode: HTTPStatusCode
 
@@ -58,6 +59,7 @@ struct NetworkHTTPStatusCodeView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkHTTPStatusCodeView_Previews: PreviewProvider {
     static let httpStatusCode: HTTPStatusCode = .unavailableForLegalReasons
 

@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 public struct SearchableTextView: View {
     @ObservedObject var viewModel: SearchableTextViewModel
 
@@ -44,6 +45,7 @@ public struct SearchableTextView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct SearchableTextView_Previews: PreviewProvider {
     static var previews: some View {
         SearchableTextView(viewModel: .init())

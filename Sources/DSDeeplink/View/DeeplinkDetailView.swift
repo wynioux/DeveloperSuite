@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct DeeplinkDetailView: View {
     @ObservedObject var entity: DeeplinkEntity
 
@@ -57,6 +58,7 @@ struct DeeplinkDetailView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct DeeplinkDetailView_Previews: PreviewProvider {
     static var previews: some View {
         DeeplinkDetailView(entity: DeeplinkEntity())

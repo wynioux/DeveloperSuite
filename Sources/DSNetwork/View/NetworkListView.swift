@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkListView: View {
     @Binding var queryItems: [URLQueryItem]?
 
@@ -87,6 +88,7 @@ struct NetworkListView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkListView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkListView(queryItems: .constant(nil))

@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkQueryItemsView: View {
     let queryItems: [URLQueryItem]
 
@@ -45,6 +46,7 @@ struct NetworkQueryItemsView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkQueryItemsDetailView_Previews: PreviewProvider {
     static let queryItems: [URLQueryItem] = [
         .init(name: "nickname", value: "wynioux"),

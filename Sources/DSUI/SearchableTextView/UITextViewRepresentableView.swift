@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct UITextViewRepresentableView: View {
     @Environment(\.isSearching) private var isSearching
     @ObservedObject var viewModel: SearchableTextViewModel
@@ -51,6 +52,7 @@ struct UITextViewRepresentableView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct UITextViewRepresentableView_Previews: PreviewProvider {
     static var previews: some View {
         UITextViewRepresentableView(viewModel: .init())

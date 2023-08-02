@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 public struct NetworkURLComponentsView: View {
     public let urlComponents: URLComponents
 
@@ -89,6 +90,7 @@ public struct NetworkURLComponentsView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkURLDetailView_Previews: PreviewProvider {
     static let urlComponents = URLComponents(string: "https://subdomain.domain.com/Controller/Method?name=Istanbul&id=34")!
 

@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 public struct DeeplinkView: View {
     @Binding var queryItems: [URLQueryItem]?
 
@@ -43,6 +44,7 @@ public struct DeeplinkView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct DeeplinkView_Previews: PreviewProvider {
     static var previews: some View {
         DeeplinkView(queryItems: .constant(nil))

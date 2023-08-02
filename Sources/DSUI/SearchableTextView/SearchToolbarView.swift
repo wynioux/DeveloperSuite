@@ -28,6 +28,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct SearchToolbarView: View {
     @ObservedObject var viewModel: SearchableTextViewModel
     var isKindNeeded: Bool = true
@@ -103,6 +104,7 @@ struct SearchToolbarView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct SearchToolbarView_Previews: PreviewProvider {
     static var previews: some View {
         SearchToolbarView(viewModel: .init())

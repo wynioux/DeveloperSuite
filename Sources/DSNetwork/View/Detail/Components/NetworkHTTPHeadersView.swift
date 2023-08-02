@@ -28,6 +28,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkHTTPHeadersView: View {
     let httpHeaders: [HTTPHeader: String]
 
@@ -84,6 +85,7 @@ struct NetworkHTTPHeadersView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkHTTPHeadersView_Previews: PreviewProvider {
     static let httpHeaders: [HTTPHeader: String] = [.contentType: "application/json"]
 
