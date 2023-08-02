@@ -28,6 +28,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkErrorDetailView: View {
     @ObservedObject var entity: NetworkErrorEntity
 
@@ -65,6 +66,7 @@ struct NetworkErrorDetailView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkErrorDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkErrorDetailView(entity: NetworkErrorEntity())

@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkHTTPBodyView: View {
     let httpBody: Data
     let httpMimeType: HTTPMimeType
@@ -74,6 +75,7 @@ struct NetworkHTTPBodyView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkHTTPBodyView_Previews: PreviewProvider {
     static let data: Data = """
     {

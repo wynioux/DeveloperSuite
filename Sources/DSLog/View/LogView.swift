@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 public struct LogView: View {
     @Binding var queryItems: [URLQueryItem]?
 
@@ -43,6 +44,7 @@ public struct LogView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct LogView_Previews: PreviewProvider {
     static var previews: some View {
         LogView(queryItems: .constant(nil))

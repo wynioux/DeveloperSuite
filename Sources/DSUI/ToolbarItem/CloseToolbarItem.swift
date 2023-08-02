@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: CloseToolbarItem
 
+@available(iOS 15, *)
 public struct CloseToolbarItem: ToolbarContent {
     private let close: () -> Void
 

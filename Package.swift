@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "DeveloperSuite",
     platforms: [
-        .iOS(.v15)
+        .iOS(.v14)
     ],
     products: [
         .library(name: "DeveloperSuite", targets: ["DeveloperSuite"])

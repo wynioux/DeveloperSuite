@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct LogCellView: View {
     @ObservedObject var entity: LogEntity
 
@@ -41,6 +42,7 @@ struct LogCellView: View {
     }
 }
 
+@available(iOS 15, *)
 extension LogCellView {
     var topSection: some View {
         HStack(spacing: 0) {

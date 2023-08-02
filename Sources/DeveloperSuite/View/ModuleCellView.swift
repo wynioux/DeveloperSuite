@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct ModuleCellView: View {
     @ScaledMetric private var size: CGFloat = 1
     @ObservedObject var suite: DeveloperSuite
@@ -49,6 +50,7 @@ struct ModuleCellView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct ModuleCellView_Previews: PreviewProvider {
     static var previews: some View {
         ModuleCellView(suite: .default, module: .bundle)

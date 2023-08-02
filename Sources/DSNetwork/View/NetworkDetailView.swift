@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkDetailView: View {
     @ScaledMetric var size: CGFloat = 1
     @ObservedObject var entity: NetworkEntity
@@ -95,6 +96,7 @@ struct NetworkDetailView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkDetailView(entity: NetworkEntity())

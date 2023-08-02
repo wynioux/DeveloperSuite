@@ -32,6 +32,7 @@ import SwiftUI
 
 // MARK: DeveloperSuite
 
+@available(iOS 15, *)
 public final class DeveloperSuite: ObservableObject {
     // MARK: Properties
 
@@ -91,6 +92,7 @@ public final class DeveloperSuite: ObservableObject {
 
 // MARK: Configuration
 
+@available(iOS 15, *)
 extension DeveloperSuite {
     enum Configuration {
         static let version: String = "0.0.1-alpha.4"

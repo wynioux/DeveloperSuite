@@ -30,6 +30,7 @@ import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkRequestDetailView: View {
     @ObservedObject var originalEntity: NetworkRequestEntity
     @ObservedObject var currentEntity: NetworkRequestEntity
@@ -152,6 +153,7 @@ struct NetworkRequestDetailView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkRequestDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkRequestDetailView(originalEntity: NetworkRequestEntity(), currentEntity: NetworkRequestEntity())

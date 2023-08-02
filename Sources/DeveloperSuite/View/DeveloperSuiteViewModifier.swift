@@ -29,6 +29,7 @@ import SwiftUI
 
 // MARK: DeveloperSuiteViewModifier
 
+@available(iOS 15, *)
 private struct DeveloperSuiteViewModifier: ViewModifier {
     @ObservedObject private var suite: DeveloperSuite = .default
     @ScaledMetric private var size: CGFloat = 1
@@ -65,6 +66,7 @@ private struct DeveloperSuiteViewModifier: ViewModifier {
 
 // MARK: DeveloperSuite
 
+@available(iOS 15, *)
 public extension View {
     func developerSuite() -> some View {
         modifier(DeveloperSuiteViewModifier())

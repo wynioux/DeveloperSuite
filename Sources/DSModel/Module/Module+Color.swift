@@ -27,6 +27,7 @@ import SwiftUI
 
 // MARK: Color
 
+@available(iOS 15, *)
 public extension Module {
     var color: Color {
         switch self {

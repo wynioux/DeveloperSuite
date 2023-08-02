@@ -27,6 +27,7 @@ import Foundation
 
 // MARK: Description
 
+@available(iOS 15, *)
 public extension URLRequest.Attribution {
     var description: String {
         switch self {
