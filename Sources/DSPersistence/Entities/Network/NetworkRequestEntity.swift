@@ -52,15 +52,13 @@ public final class NetworkRequestEntity: NSManagedObject {
     public convenience init(context: NSManagedObjectContext, request: URLRequest) {
         self.init(context: context)
 
-        guard let url = request.url,
-              let httpMethod = request.httpMethod
-        else {
+        guard let url = request.url else {
             assertionFailure("Should be never nil.")
             return
         }
 
         self.rawURL = url
-        self.rawHTTPMethod = httpMethod
+        self.rawHTTPMethod = request.httpMethod ?? ""
         self.rawHTTPBody = request.httpBody ?? request.httpBodyStreamData()
         self.rawHTTPBodySize = Int64(rawHTTPBody?.count ?? 0)
         self.rawHTTPHeaders = Set(request.allHTTPHeaderFields?.map { NetworkHeaderEntity(context: context, key: $0.key, value: $0.value) } ?? [])
