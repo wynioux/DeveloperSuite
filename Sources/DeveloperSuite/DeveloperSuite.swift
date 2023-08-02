@@ -59,7 +59,7 @@ public final class DeveloperSuite: ObservableObject {
         selectedModule = nil
     }
 
-    func open(selectedModule: Module? = nil, with queryItems: [URLQueryItem]? = nil) {
+    public func open(selectedModule: Module? = nil, with queryItems: [URLQueryItem]? = nil) {
         resetSelectedModule()
 
         self.selectedModule = selectedModule
@@ -68,7 +68,7 @@ public final class DeveloperSuite: ObservableObject {
         presented = true
     }
 
-    func close() {
+    public func close() {
         presented = false
     }
 
