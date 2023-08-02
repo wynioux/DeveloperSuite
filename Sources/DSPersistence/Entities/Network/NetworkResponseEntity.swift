@@ -44,12 +44,10 @@ public final class NetworkResponseEntity: NSManagedObject {
 
     // MARK: Convenience Initializer
 
-    public convenience init(context: NSManagedObjectContext, response: URLResponse) {
+    public convenience init(context: NSManagedObjectContext, response: HTTPURLResponse) {
         self.init(context: context)
 
-        guard let response = response as? HTTPURLResponse,
-              let url = response.url
-        else {
+        guard let url = response.url else {
             assertionFailure("Should be never nil.")
             return
         }
