@@ -95,6 +95,6 @@ public final class DeveloperSuite: ObservableObject {
 @available(iOS 15, *)
 extension DeveloperSuite {
     enum Configuration {
-        static let version: String = "0.0.1-alpha.5"
+        static let version: String = "0.0.1-alpha.6"
     }
 }

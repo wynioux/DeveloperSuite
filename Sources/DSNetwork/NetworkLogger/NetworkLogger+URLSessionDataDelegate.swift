@@ -34,7 +34,8 @@ extension NetworkLogger {
 
         store.perform { [weak self] context in
             guard let self,
-                  let entity = getEntity(from: dataTask)
+                  let entity = getEntity(from: dataTask),
+                  let response = response as? HTTPURLResponse
             else { return }
 
             entity.response = .init(context: context, response: response)
