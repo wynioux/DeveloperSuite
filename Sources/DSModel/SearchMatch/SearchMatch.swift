@@ -30,9 +30,11 @@ import UIKit
 public struct SearchMatch {
     public let range: NSRange
     public let originalForegroundColor: UIColor
+    public let originalBackgroundColor: UIColor?
 
-    public init(range: NSRange, originalForegroundColor: UIColor) {
+    public init(range: NSRange, originalForegroundColor: UIColor, originalBackgroundColor: UIColor?) {
         self.range = range
         self.originalForegroundColor = originalForegroundColor
+        self.originalBackgroundColor = originalBackgroundColor
     }
 }

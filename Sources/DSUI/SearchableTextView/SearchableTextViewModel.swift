@@ -74,6 +74,10 @@ public final class SearchableTextViewModel: ObservableObject {
         for match in matches {
             textStorage.addAttribute(.foregroundColor, value: match.originalForegroundColor, range: match.range)
             textStorage.removeAttribute(.backgroundColor, range: match.range)
+
+            if let backgroundColor = match.originalBackgroundColor {
+                textStorage.addAttribute(.backgroundColor, value: backgroundColor, range: match.range)
+            }
         }
     }
 
@@ -97,7 +101,8 @@ public final class SearchableTextViewModel: ObservableObject {
                 }
                 .map {
                     let foregroundColor = textStorage.attribute(.foregroundColor, at: $0.location, effectiveRange: nil) as? UIColor
-                    return SearchMatch(range: $0, originalForegroundColor: foregroundColor ?? .label)
+                    let backgroundColor = textStorage.attribute(.backgroundColor, at: $0.location, effectiveRange: nil) as? UIColor
+                    return SearchMatch(range: $0, originalForegroundColor: foregroundColor ?? .label, originalBackgroundColor: backgroundColor)
                 }
 
             for match in matches {
