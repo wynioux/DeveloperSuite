@@ -110,7 +110,7 @@ public extension HTTPStatusCode {
         // --------------------------------------------------------------------------
             
         // Unknown ------------------------------------------------------------------
-        case .unknown:                       return "Unknown"
+        case .unknown(let rawValue):         return String(rawValue)
         // --------------------------------------------------------------------------
         // swiftformat:enable all
         }

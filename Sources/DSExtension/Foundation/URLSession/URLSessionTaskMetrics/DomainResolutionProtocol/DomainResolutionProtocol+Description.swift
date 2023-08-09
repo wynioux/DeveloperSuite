@@ -1,6 +1,6 @@
 //
-//  HTTPMimeType+AcceptableMimeTypes.swift
-//  DSModel
+//  DomainResolutionProtocol+Description.swift
+//  DSExtension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -25,10 +25,17 @@
 
 import Foundation
 
-// MARK: AcceptableMimeTypes
+// MARK: Description
 
-public extension HTTPMimeType {
-    static var acceptableMimeTypes: [Self] {
-        return [.htm, .html, .jpeg, .jpg, .json, .pdf, .png, .txt]
+public extension URLSessionTaskMetrics.DomainResolutionProtocol {
+    var description: String {
+        switch self {
+        case .udp: return "UDP"
+        case .tcp: return "TCP"
+        case .tls: return "TLS"
+        case .https: return "HHTPS"
+        case .unknown: return "Unknown"
+        @unknown default: return "Unknown"
+        }
     }
 }

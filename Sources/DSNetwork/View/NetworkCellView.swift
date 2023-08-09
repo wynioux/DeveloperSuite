@@ -53,7 +53,7 @@ extension NetworkCellView {
     var topSection: some View {
         HStack(spacing: 0) {
             HStack(spacing: 4) {
-                Text(Image(systemName: entity.state.systemImageName))
+                Image(systemName: entity.state.systemImageName)
                     .font(.footnote)
 
                 Text(entity.state == .success ? (entity.response?.statusCode.title ?? "") : entity.state.description)
@@ -72,16 +72,18 @@ extension NetworkCellView {
                     .foregroundColor(Color(.secondaryLabel))
             }
         }
+        .animation(.linear(duration: 0.1), value: entity.state)
     }
 
     var middleSection: some View {
         VStack {
-            Text(entity.originalRequest.urlComponents?.url?.description ?? "")
+            Text(entity.state == .pending ? (entity.originalRequest.urlComponents?.url?.description ?? "") : (entity.currentRequest.urlComponents?.url?.description ?? ""))
                 .font(.body)
                 .foregroundColor(Color(.label))
                 .lineLimit(1)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .animation(.linear(duration: 0.1), value: entity.state)
     }
 
     var bottomSection: some View {
@@ -91,13 +93,19 @@ extension NetworkCellView {
 
             Spacer()
 
-            Text("\(Image(systemName: "arrow.up")) \(ByteCountFormatter.cell.string(fromByteCount: Int64(entity.originalRequest.rawHTTPBodySize)))")
+            Text("\(Image(systemName: "arrow.up")) \(ByteCountFormatter.cell.string(fromByteCount: Int64(entity.originalRequest.decompressedHTTPBodySize)))")
 
-            Text("\(Image(systemName: "arrow.down")) \(ByteCountFormatter.cell.string(fromByteCount: Int64(entity.response?.rawHTTPBodySize ?? 0)))")
+            if let decompressedHTTPBodySize = entity.response?.decompressedHTTPBodySize {
+                Text("\(Image(systemName: "arrow.down")) \(ByteCountFormatter.cell.string(fromByteCount: Int64(decompressedHTTPBodySize)))")
+            }
 
-            Text("\(Image(systemName: "clock")) \(DurationFormatter.string(from: TimeInterval(entity.metrics?.duration ?? 0), isPrecise: false))")
+            if let duration = entity.metrics?.duration {
+                Text("\(Image(systemName: "clock")) \(DurationFormatter.string(from: TimeInterval(duration)))")
+            }
         }
         .font(.footnote)
         .foregroundColor(Color(.secondaryLabel))
+        .animation(.linear(duration: 0.1), value: entity.response)
+        .animation(.linear(duration: 0.1), value: entity.metrics)
     }
 }

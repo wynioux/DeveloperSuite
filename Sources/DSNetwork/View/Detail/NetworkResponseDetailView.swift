@@ -97,15 +97,15 @@ struct NetworkResponseDetailView: View {
                 }
 
                 if let mimeType = response.mimeType,
-                   !response.rawHTTPBody.isEmpty
+                   !response.decompressedHTTPBody.isEmpty
                 {
-                    NavigationLink(destination: NetworkHTTPBodyView(httpBody: response.rawHTTPBody,
+                    NavigationLink(destination: NetworkHTTPBodyView(httpBody: response.decompressedHTTPBody,
                                                                     httpMimeType: mimeType,
                                                                     error: error))
                     {
                         Text("Body")
                             .fixedSize()
-                            .badge(ByteCountFormatter.cell.string(fromByteCount: response.rawHTTPBodySize))
+                            .badge(ByteCountFormatter.cell.string(fromByteCount: Int64(response.decompressedHTTPBodySize)))
                     }
                 }
             }

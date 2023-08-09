@@ -1,6 +1,6 @@
 //
-//  NetworkLogger.swift
-//  DSNetwork
+//  tls_protocol_version_t+Description.swift
+//  DSExtension
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,32 +23,20 @@
 //  THE SOFTWARE.
 //
 
-import DSPersistence
 import Foundation
 
-// MARK: NetworkLogger
+// MARK: Description
 
-public final class NetworkLogger {
-    // MARK: Properties
-
-    public static let `default` = NetworkLogger(persistence: .default)
-
-    var configuration = Configuration()
-    let store: PersistentStore
-
-    public init(persistence: Persistence = .default) {
-        self.store = persistence.store
-    }
-    
-    public func configure(_ configure: (inout Configuration) -> Void) {
-        configure(&configuration)
-    }
-    
-    public struct Configuration: Sendable {
-        /// A custom label to associated with stored messages.
-        public var label: String = "io.github.wynioux.DeveloperSuite.NetworkLogger"
-
-        /// Initializes the default configuration.
-        public init() {}
+public extension tls_protocol_version_t {
+    var description: String {
+        switch self {
+        case .TLSv10: return "TLS v10"
+        case .TLSv11: return "TLS v11"
+        case .TLSv12: return "TLS v12"
+        case .TLSv13: return "TLS v13"
+        case .DTLSv10: return "DTLS v10"
+        case .DTLSv12: return "DTLS v12"
+        @unknown default: return "Unknown"
+        }
     }
 }

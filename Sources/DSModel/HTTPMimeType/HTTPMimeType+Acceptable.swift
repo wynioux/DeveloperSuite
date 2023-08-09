@@ -1,6 +1,6 @@
 //
-//  NetworkLogger.swift
-//  DSNetwork
+//  HTTPMimeType+Acceptable.swift
+//  DSModel
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,32 +23,15 @@
 //  THE SOFTWARE.
 //
 
-import DSPersistence
 import Foundation
 
-// MARK: NetworkLogger
+// MARK: Acceptable
 
-public final class NetworkLogger {
-    // MARK: Properties
+public extension HTTPMimeType {
+    var acceptable: Bool {
+        let acceptableMimeTypes: [Self] = [.htm, .html, .jpeg, .jpg, .json, .pdf, .png, .txt]
 
-    public static let `default` = NetworkLogger(persistence: .default)
-
-    var configuration = Configuration()
-    let store: PersistentStore
-
-    public init(persistence: Persistence = .default) {
-        self.store = persistence.store
-    }
-    
-    public func configure(_ configure: (inout Configuration) -> Void) {
-        configure(&configuration)
-    }
-    
-    public struct Configuration: Sendable {
-        /// A custom label to associated with stored messages.
-        public var label: String = "io.github.wynioux.DeveloperSuite.NetworkLogger"
-
-        /// Initializes the default configuration.
-        public init() {}
+        return acceptableMimeTypes
+            .contains { $0 == self }
     }
 }

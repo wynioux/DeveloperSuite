@@ -24,6 +24,12 @@ final class AlamofireNetworkService {
 
 final class DeveloperSuiteEventMonitor: EventMonitor {
     let networkLogger = NetworkLogger.default
+    
+    init() {
+        networkLogger.configure { configuration in
+            configuration.label = "Alamofire"
+        }
+    }
 
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
         guard let task = request.task else { return }

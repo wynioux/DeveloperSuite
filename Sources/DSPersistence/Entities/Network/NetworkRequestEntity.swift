@@ -34,8 +34,8 @@ public final class NetworkRequestEntity: NSManagedObject {
 
     @NSManaged public var rawURL: URL
     @NSManaged public var rawHTTPMethod: String
-    @NSManaged public var rawHTTPBody: Data?
-    @NSManaged public var rawHTTPBodySize: Int64
+    @NSManaged public var compressedHTTPBody: NSData
+    @NSManaged public var compressedHTTPBodySize: Int
     @NSManaged public var rawHTTPHeaders: Set<NetworkHeaderEntity>
     @NSManaged public var rawMainDocumentURL: URL?
     @NSManaged public var rawCachePolicy: UInt
@@ -46,6 +46,13 @@ public final class NetworkRequestEntity: NSManagedObject {
     @NSManaged public var allowsConstrainedNetworkAccess: Bool
     @NSManaged public var allowsExpensiveNetworkAccess: Bool
     @NSManaged public var assumesHTTP3Capable: Bool
+    
+    public lazy var decompressedHTTPBody: Data = {
+        guard let decompressedHTTPBody = try? compressedHTTPBody.decompressed(using: .lzfse) else { return Data() }
+        return decompressedHTTPBody as Data
+    }()
+
+    public lazy var decompressedHTTPBodySize: Int = decompressedHTTPBody.count
 
     // MARK: Convenience Initializer
 
@@ -59,8 +66,8 @@ public final class NetworkRequestEntity: NSManagedObject {
 
         self.rawURL = url
         self.rawHTTPMethod = request.httpMethod ?? ""
-        self.rawHTTPBody = request.httpBody ?? request.httpBodyStreamData()
-        self.rawHTTPBodySize = Int64(rawHTTPBody?.count ?? 0)
+        self.compressedHTTPBody = (request.httpBody ?? request.httpBodyStreamData() ?? Data()) as NSData
+        self.compressedHTTPBodySize = compressedHTTPBody.count
         self.rawHTTPHeaders = Set(request.allHTTPHeaderFields?.map { NetworkHeaderEntity(context: context, key: $0.key, value: $0.value) } ?? [])
         self.rawMainDocumentURL = request.mainDocumentURL
         self.rawCachePolicy = request.cachePolicy.rawValue
@@ -124,8 +131,8 @@ extension NetworkRequestEntity {
         entityDescription.properties = [
             NSAttributeDescription(name: "rawURL", attributeType: .URIAttributeType),
             NSAttributeDescription(name: "rawHTTPMethod", attributeType: .stringAttributeType),
-            NSAttributeDescription(name: "rawHTTPBody", attributeType: .binaryDataAttributeType, isOptional: true),
-            NSAttributeDescription(name: "rawHTTPBodySize", attributeType: .integer64AttributeType),
+            NSAttributeDescription(name: "compressedHTTPBody", attributeType: .binaryDataAttributeType),
+            NSAttributeDescription(name: "compressedHTTPBodySize", attributeType: .integer64AttributeType),
             NSRelationshipDescription(name: "rawHTTPHeaders", relationshipType: .oneToMany, entityDescription: networkHeaderEntity),
             NSAttributeDescription(name: "rawMainDocumentURL", attributeType: .URIAttributeType, isOptional: true),
             NSAttributeDescription(name: "rawCachePolicy", attributeType: .integer64AttributeType),

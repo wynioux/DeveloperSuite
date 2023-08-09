@@ -23,17 +23,36 @@
 //  THE SOFTWARE.
 //
 
+import DSExtension
+import DSModel
 import DSPersistence
 import SwiftUI
 
 // MARK: View
 
+@available(iOS 15, *)
 struct NetworkMetricsDetailView: View {
     @ObservedObject var entity: NetworkMetricsEntity
 
     var body: some View {
         List {
-            Text("")
+            Section {
+                Text("Redirect Count")
+                    .fixedSize()
+                    .badge(String(entity.redirectCount))
+
+                Text("Duration")
+                    .fixedSize()
+                    .badge(DurationFormatter.string(from: TimeInterval(entity.duration)))
+            }
+
+            Section("TRANSACTIONS") {
+                ForEach(entity.transactions.sorted()) { transaction in
+                    NavigationLink(destination: NetworkTransactionDetailView(entity: transaction)) {
+                        NetworkTransactionCellView(entity: transaction)
+                    }
+                }
+            }
         }
         .navigationTitle("Metrics Details")
         .navigationBarTitleDisplayMode(.inline)
@@ -42,6 +61,7 @@ struct NetworkMetricsDetailView: View {
 
 // MARK: Preview
 
+@available(iOS 15, *)
 struct NetworkMetricsDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkMetricsDetailView(entity: NetworkMetricsEntity())

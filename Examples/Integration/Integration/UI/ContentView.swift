@@ -25,7 +25,7 @@ struct ContentView: View {
                     if let url = URL(string: "integration://user/open?name=bahadir") {
                         UIApplication.shared.open(url)
                     }
-                    
+
                     if let url = URL(string: "integration://feature/login?username=foo&password=123456789") {
                         UIApplication.shared.open(url)
                     }
@@ -37,6 +37,10 @@ struct ContentView: View {
                 }
 
                 Button("Test Network") {
+                    alamofireNetworkService.performRequest(url: "https://google.com", responseType: SuccessDecodable.self) { (result: Result<SuccessDecodable, Error>) in
+                        print(result)
+                    }
+                    
                     alamofireNetworkService.performRequest(url: "https://httpbin.org/get", responseType: SuccessDecodable.self) { (result: Result<SuccessDecodable, Error>) in
                         print(result)
                     }
@@ -46,6 +50,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationTitle("Demo")
         }
         .navigationViewStyle(.stack)
     }

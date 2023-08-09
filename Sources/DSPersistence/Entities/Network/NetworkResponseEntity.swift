@@ -39,8 +39,15 @@ public final class NetworkResponseEntity: NSManagedObject {
     @NSManaged public var textEncodingName: String?
     @NSManaged public var suggestedFilename: String?
     @NSManaged public var expectedContentLength: Int64
-    @NSManaged public var rawHTTPBody: Data
-    @NSManaged public var rawHTTPBodySize: Int64
+    @NSManaged public var compressedHTTPBody: NSData
+    @NSManaged public var compressedHTTPBodySize: Int
+
+    public lazy var decompressedHTTPBody: Data = {
+        guard let decompressedHTTPBody = try? compressedHTTPBody.decompressed(using: .lzfse) else { return Data() }
+        return decompressedHTTPBody as Data
+    }()
+
+    public lazy var decompressedHTTPBodySize: Int = decompressedHTTPBody.count
 
     // MARK: Convenience Initializer
 
@@ -59,8 +66,8 @@ public final class NetworkResponseEntity: NSManagedObject {
         self.textEncodingName = response.textEncodingName
         self.suggestedFilename = response.suggestedFilename
         self.expectedContentLength = response.expectedContentLength
-        self.rawHTTPBody = Data()
-        self.rawHTTPBodySize = 0
+        self.compressedHTTPBody = Data() as NSData
+        self.compressedHTTPBodySize = 0
     }
 }
 
@@ -99,8 +106,8 @@ extension NetworkResponseEntity {
             NSAttributeDescription(name: "textEncodingName", attributeType: .stringAttributeType, isOptional: true),
             NSAttributeDescription(name: "suggestedFilename", attributeType: .stringAttributeType, isOptional: true),
             NSAttributeDescription(name: "expectedContentLength", attributeType: .integer64AttributeType),
-            NSAttributeDescription(name: "rawHTTPBody", attributeType: .binaryDataAttributeType),
-            NSAttributeDescription(name: "rawHTTPBodySize", attributeType: .integer64AttributeType)
+            NSAttributeDescription(name: "compressedHTTPBody", attributeType: .binaryDataAttributeType),
+            NSAttributeDescription(name: "compressedHTTPBodySize", attributeType: .integer64AttributeType)
         ]
 
         return entityDescription

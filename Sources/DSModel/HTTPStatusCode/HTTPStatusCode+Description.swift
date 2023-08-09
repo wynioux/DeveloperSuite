@@ -225,8 +225,8 @@ public extension HTTPStatusCode {
             return "Indicates that the client needs to authenticate to gain network access."
             
         // Unknown
-        case .unknown:
-            return "Unknown"
+        case .unknown(let rawValue):
+            return String(rawValue)
         }
     }
 }

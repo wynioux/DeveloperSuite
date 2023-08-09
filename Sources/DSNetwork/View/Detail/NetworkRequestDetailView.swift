@@ -101,11 +101,11 @@ struct NetworkRequestDetailView: View {
                     }
                 }
 
-                if let httpBody = selectedEntity.rawHTTPBody {
-                    NavigationLink(destination: NetworkHTTPBodyView(httpBody: httpBody, httpMimeType: .json)) {
+                if !selectedEntity.decompressedHTTPBody.isEmpty {
+                    NavigationLink(destination: NetworkHTTPBodyView(httpBody: selectedEntity.decompressedHTTPBody, httpMimeType: .json)) {
                         Text("Body")
                             .fixedSize()
-                            .badge(ByteCountFormatter.cell.string(fromByteCount: selectedEntity.rawHTTPBodySize))
+                            .badge(ByteCountFormatter.cell.string(fromByteCount: Int64(selectedEntity.decompressedHTTPBodySize)))
                     }
                 }
             }

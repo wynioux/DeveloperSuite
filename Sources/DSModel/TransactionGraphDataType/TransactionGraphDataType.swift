@@ -1,6 +1,6 @@
 //
-//  NetworkLogger.swift
-//  DSNetwork
+//  TransactionGraphDataType.swift
+//  DSModel
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,32 +23,23 @@
 //  THE SOFTWARE.
 //
 
-import DSPersistence
 import Foundation
 
-// MARK: NetworkLogger
+// MARK: TransactionGraphDataType
 
-public final class NetworkLogger {
-    // MARK: Properties
+public enum TransactionGraphDataType: Int {
+    case queue
+    case dns
+    case tcp
+    case tls
+    case request
+    case response
+}
 
-    public static let `default` = NetworkLogger(persistence: .default)
+// MARK: Comparable
 
-    var configuration = Configuration()
-    let store: PersistentStore
-
-    public init(persistence: Persistence = .default) {
-        self.store = persistence.store
-    }
-    
-    public func configure(_ configure: (inout Configuration) -> Void) {
-        configure(&configuration)
-    }
-    
-    public struct Configuration: Sendable {
-        /// A custom label to associated with stored messages.
-        public var label: String = "io.github.wynioux.DeveloperSuite.NetworkLogger"
-
-        /// Initializes the default configuration.
-        public init() {}
+extension TransactionGraphDataType: Comparable {
+    public static func < (lhs: TransactionGraphDataType, rhs: TransactionGraphDataType) -> Bool {
+        return lhs.rawValue < rhs.rawValue
     }
 }

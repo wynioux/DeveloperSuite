@@ -32,6 +32,8 @@ public final class NetworkMetricsEntity: NSManagedObject {
     // MARK: Properties
 
     @NSManaged public var duration: Double
+    @NSManaged public var redirectCount: Int
+    @NSManaged public var transactions: Set<NetworkTransactionMetricsEntity>
 
     // MARK: Convenience Initializer
 
@@ -39,17 +41,21 @@ public final class NetworkMetricsEntity: NSManagedObject {
         self.init(context: context)
 
         self.duration = metrics.taskInterval.duration
+        self.redirectCount = metrics.redirectCount
+        self.transactions = Set(metrics.transactionMetrics.map { NetworkTransactionMetricsEntity(context: context, transactionMetrics: $0) })
     }
 }
 
 // MARK: Functional Extension
 
 extension NetworkMetricsEntity {
-    static func description() -> NSEntityDescription {
+    static func description(networkTransactionMetricsEntity: NSEntityDescription) -> NSEntityDescription {
         let entityDescription: NSEntityDescription = .init(for: Self.self)
 
         entityDescription.properties = [
-            NSAttributeDescription(name: "duration", attributeType: .doubleAttributeType)
+            NSAttributeDescription(name: "duration", attributeType: .doubleAttributeType),
+            NSAttributeDescription(name: "redirectCount", attributeType: .integer64AttributeType),
+            NSRelationshipDescription(name: "transactions", relationshipType: .oneToMany, entityDescription: networkTransactionMetricsEntity)
         ]
 
         return entityDescription

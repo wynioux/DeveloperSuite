@@ -48,17 +48,20 @@ extension NetworkLogger {
 
     func log(_ dataTask: URLSessionDataTask, didReceive data: Data) {
         store.perform { [weak self] _ in
+            
             guard let self,
                   let entity = getEntity(from: dataTask),
                   let response = entity.response,
-                  HTTPMimeType.acceptableMimeTypes.contains(where: {
-                      guard let mimeType = response.mimeType else { return false }
-                      return $0 == mimeType
-                  })
+                  let mimeType = response.mimeType,
+                  mimeType.acceptable
             else { return }
 
-            response.rawHTTPBody.append(data)
-            response.rawHTTPBodySize = Int64(response.rawHTTPBody.count)
+            var decompressedHTTPBody = response.decompressedHTTPBody
+            decompressedHTTPBody.append(data)
+
+            guard let compressedHTTPBody = try? (decompressedHTTPBody as NSData).compressed(using: .lzfse) else { return }
+            response.compressedHTTPBody = compressedHTTPBody
+            response.compressedHTTPBodySize = compressedHTTPBody.count
         }
     }
 

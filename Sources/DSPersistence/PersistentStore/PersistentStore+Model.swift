@@ -61,9 +61,15 @@ extension PersistentStore {
 
         managedObjectModel.entities.append(networkResponseEntity)
 
+        // NetworkTransactionMetricsEntity
+
+        let networkTransactionMetricsEntity: NSEntityDescription = NetworkTransactionMetricsEntity.description()
+        
+        managedObjectModel.entities.append(networkTransactionMetricsEntity)
+
         // MARK: NetworkMetricsEntity
 
-        let networkMetricsEntity: NSEntityDescription = NetworkMetricsEntity.description()
+        let networkMetricsEntity: NSEntityDescription = NetworkMetricsEntity.description(networkTransactionMetricsEntity: networkTransactionMetricsEntity)
 
         managedObjectModel.entities.append(networkMetricsEntity)
 

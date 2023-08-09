@@ -57,9 +57,8 @@ public extension HTTPMethod {
         case .patch:
             return "Applies partial modifications to a resource."
             
-        case .unknown:
-            return "Unknown"
-            
+        case .unknown(let rawValue):
+            return rawValue
         }
     }
 }
