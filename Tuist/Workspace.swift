@@ -1,6 +1,6 @@
 //
-//  HTTPStatusCode+Color.swift
-//  DSModel
+//  Workspace.swift
+//  Tuist
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -23,21 +23,11 @@
 //  THE SOFTWARE.
 //
 
-import SwiftUI
+import ProjectDescription
 
-// MARK: Color
+// MARK: Workspace
 
-public extension HTTPStatusCode {
-    var color: Color {
-        switch self.rawValue {
-        // swiftformat:disable all
-        case 100...199: return Color(.systemBlue)
-        case 200...299: return Color(.systemGreen)
-        case 300...399: return Color(.systemOrange)
-        case 400...499: return Color(.systemPink)
-        case 500...599: return Color(.systemRed)
-        default:        return Color(.systemBrown)
-        // swiftformat:enable all
-        }
-    }
-}
+let workspace = Workspace(
+    name: "DeveloperSuite",
+    projects: [""]
+)

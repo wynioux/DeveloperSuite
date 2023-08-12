@@ -271,3 +271,14 @@ xcuserdata
 .netrc
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,xcode,appcode,visualstudiocode,swift,swiftpackagemanager
+
+### Projects ###
+*.xcodeproj
+*.xcworkspace
+
+### Tuist derived files ###
+graph.dot
+Derived/
+
+### Tuist managed dependencies ###
+Tuist/Dependencies
