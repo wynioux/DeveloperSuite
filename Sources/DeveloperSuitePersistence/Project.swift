@@ -1,6 +1,6 @@
 //
-//  Workspace.swift
-//  Tuist
+//  Project.swift
+//  DeveloperSuitePersistence
 //
 //  Copyright (c) 2023 Bahadır A. Güder
 //
@@ -24,10 +24,15 @@
 //
 
 import ProjectDescription
+import ProjectDescriptionHelpers
 
-// MARK: Workspace
+// MARK: Project
 
-let workspace = Workspace(
-    name: "DeveloperSuite",
-    projects: [""]
+let project = Project.framework(
+    name: "DeveloperSuitePersistence",
+    baseBundleID: "io.github.wynioux",
+    dependencies: [
+        .composableArchitecture
+    ],
+    createDemoApp: false
 )
